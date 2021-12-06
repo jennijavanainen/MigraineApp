@@ -52,7 +52,7 @@ public class AddMigraineActivity extends AppCompatActivity {
     /**
      * Method creates Date, Time and MigraineEvent objects with parameters given by the user.
      * If active Migraine does not exist, the method creates it as well.
-     * After this the Activity closes and user returns to MainActivity with information about activeMigraineExists.
+     * Information will be saved in database and the user will return to MainActivity.
      * @param view saveButton
      */
     public void saveButtonClicked(View view) {
@@ -66,6 +66,7 @@ public class AddMigraineActivity extends AppCompatActivity {
             migraineList.addMigraine(migraine);
             activeMigraineExists = true;
         }
+
         // Save info to database
 
         Intent intent = new Intent(this, MainActivity.class);
