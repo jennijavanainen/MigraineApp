@@ -66,6 +66,7 @@ public class AddMigraineActivity extends AppCompatActivity {
             migraineList.addMigraine(migraine);
             activeMigraineExists = true;
         }
+
         // Save info to database
 
         Intent intent = new Intent(this, MainActivity.class);

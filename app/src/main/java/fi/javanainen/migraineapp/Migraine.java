@@ -42,7 +42,6 @@ public class Migraine {
         events.add(new MigraineEvent(date, time, pain, symptoms, medicines, treatments));
     }
 
-
     public ArrayList<String> getTriggers() {
         return triggers;
     }
