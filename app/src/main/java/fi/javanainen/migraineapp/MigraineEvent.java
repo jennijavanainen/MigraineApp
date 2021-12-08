@@ -1,6 +1,7 @@
 package fi.javanainen.migraineapp;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Class represents single event in a migraine attack.
@@ -28,9 +29,7 @@ public class MigraineEvent {
     }
 
 
-    public Date getDate() {
-        return date;
-    }
+    public Date getDate() { return date; }
 
     public Time getTime() {
         return time;
@@ -50,5 +49,16 @@ public class MigraineEvent {
 
     public ArrayList<String> getTreatments() {
         return treatments;
+    }
+
+    /**
+     * Method creates a new Calendar object from the Event information and returns it.
+     * Calendar object has information about the date and time.
+     * @return Calendar
+     */
+    public Calendar getCalendar() {
+        Calendar c = Calendar.getInstance();
+        c.set(date.getYear(), date.getMonth() - 1, date.getDay(), time.getHours(), time.getMinutes());
+        return c;
     }
 }
