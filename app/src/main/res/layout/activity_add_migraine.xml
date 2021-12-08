@@ -6,23 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".AddMigraineActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/in_date"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="112dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/text_date"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/in_time"
+        android:text="@string/text_date"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_date"
         app:layout_constraintEnd_toStartOf="@+id/btn_date"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
@@ -40,24 +37,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/in_time"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/in_date"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:hint="@string/text_time"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        android:text="@string/text_time"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_time"
         app:layout_constraintEnd_toStartOf="@+id/btn_time"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/in_date"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
@@ -95,5 +88,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7564979" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
