@@ -1,5 +1,7 @@
 package fi.javanainen.migraineapp;
 
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 

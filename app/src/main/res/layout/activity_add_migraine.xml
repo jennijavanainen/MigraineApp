@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".AddMigraineActivity">
-
     <TextView
         android:id="@+id/in_date"
         android:layout_width="wrap_content"
@@ -82,12 +83,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+    <EditText
+        android:id="@+id/edit_treatment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="treatment"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/edit_trigger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="trigger"
+        android:inputType="text"/>
+    <TextView
+        android:id="@+id/edit_pain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7564979" />
+        android:text="Pain"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/pain_slider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
