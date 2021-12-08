@@ -5,8 +5,8 @@
     <string name="main_menu_item">Main</string>
     <string name="stats_menu_item">History</string>
     <string name="settings_menu_item">Settings</string>
-    <string name="select_date">Select date</string>
-    <string name="select_time">Select time</string>
+    <string name="select_date">Edit date</string>
+    <string name="select_time">Edit time</string>
     <string name="text_date">Date</string>
     <string name="text_time">Time</string>
 </resources>
