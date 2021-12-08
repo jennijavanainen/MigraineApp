@@ -64,4 +64,12 @@ public class Date {
         this.year = year;
     }
 
+    /**
+     * Returns the date in text form
+     * @return String Date in text form
+     */
+    @Override
+    public String toString() {
+        return this.day + "." + this.month + "." + this.year;
+    }
 }

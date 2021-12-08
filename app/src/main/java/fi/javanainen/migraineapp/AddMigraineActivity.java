@@ -56,11 +56,11 @@ public class AddMigraineActivity extends AppCompatActivity {
      * @param view saveButton
      */
     public void saveButtonClicked(View view) {
-        date = new Date(4, 12, 2021);   // Tiedot haetaan
+        date = new Date(3, 12, 2021);   // Tiedot haetaan
         time = new Time(14, 06);           // Tiedot haetaan
         event = new MigraineEvent(date, time, pain, symptoms, medicines, treatments);
         if (activeMigraineExists) {
-            migraineList.returnLast().addEvent(date, time, pain, symptoms, medicines, treatments);
+            migraineList.getLast().addEvent(date, time, pain, symptoms, medicines, treatments);
         } else {
             migraine = new Migraine(triggers, event);
             migraineList.addMigraine(migraine);

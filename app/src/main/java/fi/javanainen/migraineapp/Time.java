@@ -45,4 +45,13 @@ public class Time {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
+
+    /**
+     * Returns the time in text form
+     * @return String time in text form
+     */
+    @Override
+    public String toString() {
+        return this.hours + "." + this.minutes;
+    }
 }
