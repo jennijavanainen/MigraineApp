@@ -28,8 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         migraineList = MigraineList.getInstance();
+        addNavbar();
 
-        // Navbar functionality
+
+    }
+
+    /**
+     * Adds bottom navbar to the Activity.
+     */
+    public void addNavbar() {
         navBar = findViewById(R.id.bottom_navigation);
         navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -47,9 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
+    /**
+     * Starts AddMigraineActivity when button is clicked
+     * @param view View
+     */
     public void addNewMigraineButtonClicked(View view) {
         Intent intent = new Intent(this, AddMigraineActivity.class);
         startActivity(intent);

@@ -19,8 +19,15 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        addNavbar();
 
-        // Navbar functionality
+
+    }
+
+    /**
+     * Adds bottom navbar to the Activity.
+     */
+    public void addNavbar() {
         navBar = findViewById(R.id.bottom_navigation);
         navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
