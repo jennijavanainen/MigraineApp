@@ -4,17 +4,24 @@ package fi.javanainen.migraineapp;
  * Activity is responsible for adding a new Migraine if no active Migraine exists.
  * Activity will also create a single MigraineEvent. The user chooses the parameters.
  * If active Migraine exists, the activity will use it and create only a new MigraineEvent.
+ * @see https://www.journaldev.com/9976/android-date-time-picker-dialog
  * @author Jenni Javanainen
  */
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AddMigraineActivity extends AppCompatActivity {
 
@@ -32,6 +39,9 @@ public class AddMigraineActivity extends AppCompatActivity {
     private Migraine migraine;
 
     // Views
+    Button btnDatePicker, btnTimePicker;
+    EditText txtDate, txtTime;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
 
     @Override
@@ -39,6 +49,12 @@ public class AddMigraineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_migraine);
         migraineList = MigraineList.getInstance();
+
+        btnDatePicker=(Button)findViewById(R.id.btn_date);
+        btnTimePicker=(Button)findViewById(R.id.btn_time);
+        txtDate=(EditText)findViewById(R.id.in_date);
+        txtTime=(EditText)findViewById(R.id.in_time);
+
         // get activemigraineexists
     }
 
@@ -72,6 +88,47 @@ public class AddMigraineActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
+    }
+
+    /**
+     * Creates a DatePicker where the user can easily select the date. Default value is current date.
+     * @param view View
+     */
+    public void selectDate(View view) {
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        txtDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    /**
+     * Creates a TimePicker in 24h form, where the user can easily select the time. Default value is current time.
+     * @param view View
+     */
+    public void selectTime(View view) {
+        final Calendar c = Calendar.getInstance();
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+        mMinute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+                        txtTime.setText(hourOfDay + "." + minute);
+                    }
+                }, mHour, mMinute, true);
+        timePickerDialog.show();
     }
 
 
