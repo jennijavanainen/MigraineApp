@@ -15,16 +15,13 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddMigraineActivity extends AppCompatActivity {
+    private final Calendar c = Calendar.getInstance();
 
     // Migraine attributes
     private boolean activeMigraineExists;
@@ -43,7 +40,6 @@ public class AddMigraineActivity extends AppCompatActivity {
     TextView txtDate, txtTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,19 +47,21 @@ public class AddMigraineActivity extends AppCompatActivity {
         migraineList = MigraineList.getInstance();
         txtDate=(TextView) findViewById(R.id.in_date);
         txtTime=(TextView) findViewById(R.id.in_time);
-        final Calendar c = Calendar.getInstance();
+
         mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
+        mMonth = c.get(Calendar.MONTH) + 1;
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        txtDate.setText(mDay + "." + mMonth + "." +mYear);
+        date = new Date(mDay,mMonth,mYear);
+        txtDate.setText(date.toString());
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
-        txtTime.setText(mHour + "." + mMinute);
+        time = new Time(mHour,mMinute);
+        txtTime.setText(time.toString());
 
-        // get activemigraineexists
+        // get activeMigraineExists from database
     }
 
-    // Adding triggers
+    // Adding triggers (only when adding new migraine)
     // Adding pain
     // Adding symptoms
     // Adding medicines
@@ -71,14 +69,12 @@ public class AddMigraineActivity extends AppCompatActivity {
 
 
     /**
-     * Method creates Date, Time and MigraineEvent objects with parameters given by the user.
+     * Method creates MigraineEvent object with parameters given by the user.
      * If active Migraine does not exist, the method creates it as well.
      * Information will be saved in database and the user will return to MainActivity.
      * @param view saveButton
      */
     public void saveButtonClicked(View view) {
-        date = new Date(3, 12, 2021);   // Tiedot haetaan
-        time = new Time(14, 06);           // Tiedot haetaan
         event = new MigraineEvent(date, time, pain, symptoms, medicines, treatments);
         if (activeMigraineExists) {
             migraineList.getLast().addEvent(date, time, pain, symptoms, medicines, treatments);
@@ -89,6 +85,7 @@ public class AddMigraineActivity extends AppCompatActivity {
         }
 
         // Save info to database
+        // (also activeMigraineExists!)
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -101,7 +98,12 @@ public class AddMigraineActivity extends AppCompatActivity {
      */
     public void selectDate(View view) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view1, year, monthOfYear, dayOfMonth) -> txtDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year), mYear, mMonth, mDay);
+                (view1, year, monthOfYear, dayOfMonth) -> {
+                    date.setDay(dayOfMonth);
+                    date.setMonth(monthOfYear + 1);
+                    date.setYear(year);
+                    txtDate.setText(date.toString());
+                }, mYear, mMonth, mDay);
         datePickerDialog.show();
 
     }
@@ -112,7 +114,11 @@ public class AddMigraineActivity extends AppCompatActivity {
      */
     public void selectTime(View view) {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                (view1, hourOfDay, minute) -> txtTime.setText(hourOfDay + "." + minute), mHour, mMinute, true);
+                (view1, hourOfDay, minute) ->  {
+                    time.setHours(hourOfDay);
+                    time.setMinutes(minute);
+                    txtTime.setText(time.toString());
+                }, mHour, mMinute, true);
         timePickerDialog.show();
     }
 
