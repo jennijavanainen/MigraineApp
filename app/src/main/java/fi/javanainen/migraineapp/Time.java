@@ -52,6 +52,9 @@ public class Time {
      */
     @Override
     public String toString() {
+        if (minutes < 10) {
+            return this.hours + ".0" + this.minutes;
+        }
         return this.hours + "." + this.minutes;
     }
 }
