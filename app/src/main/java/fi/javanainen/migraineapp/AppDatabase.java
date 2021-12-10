@@ -7,19 +7,18 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Migraine.class}, version = 1)
+@Database(entities = {MigraineEvent.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-
     private static volatile AppDatabase INSTANCE;
 
-    public abstract MigraineDao migraineDao();
+    public abstract MigraineEventDao migraineEventDao();
 
     // --- INSTANCE ---
-    public static AppDatabase getInstance(Context context) {
+    public static synchronized AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
-            synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "migraine_database")
@@ -28,9 +27,9 @@ public abstract class AppDatabase extends RoomDatabase {
                             .build();
                 }
             }
-        }
         return INSTANCE;
     }
+
     private static RoomDatabase.Callback roomCallBack = new RoomDatabase.Callback(){
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -39,15 +38,15 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
-        MigraineDao migraineDao;
+        MigraineEventDao migraineEventDao;
 
         private PopulateDbAsyncTask(AppDatabase db){
-            migraineDao = db.migraineDao();
+            migraineEventDao = db.migraineEventDao();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            //migraineDao.insertAll(new MigraineEvent("11","","f","","","",""));
+            //migraineEventDao.insertAll(new MigraineEvent("11","1");
             return null;
         }
     }

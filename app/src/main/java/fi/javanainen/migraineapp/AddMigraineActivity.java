@@ -13,14 +13,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
 
@@ -39,9 +41,9 @@ public class AddMigraineActivity extends AppCompatActivity {
     //Teemun juttuja
     //private EditText editTextDate;
     //private EditText editTextTime;
-    //private EditText editTextTreatment;
-    //private EditText editTextTrigger;
-    //private Slider painSlider;
+    private EditText editTextTreatment;
+    private EditText editTextMedicine;
+    private Slider painSlider;
 
     // Migraine attributes
     private boolean activeMigraineExists;
@@ -79,26 +81,8 @@ public class AddMigraineActivity extends AppCompatActivity {
 
         // get activemigraineexists
 
-        //Teemun RecyclerView:
-
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-
-        MigraineAdapter adapter = new MigraineAdapter();
-        recyclerView.setAdapter(adapter);
-
-        migraineViewModel = new ViewModelProvider(this).get(MigraineViewModel.class);
-        migraineViewModel.getAllMigraines().observe(this, new Observer<List<Migraine>>() {
-            @Override
-            public void onChanged(List<Migraine> migraines) {
-                adapter.setMigranes(migraines);
-            }
-        });
-        editTextDate = findViewById(R.id.edit_date);
-        editTextTime = findViewById(R.id.edit_time);
+        editTextMedicine = findViewById(R.id.edit_medicine);
         editTextTreatment = findViewById(R.id.edit_treatment);
-        editTextTrigger = findViewById(R.id.edit_trigger);
         painSlider = findViewById(R.id.pain_slider);
 
         painSlider.setMinimumHeight(0);
@@ -107,6 +91,39 @@ public class AddMigraineActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Migraine");
     }
+    private void saveMigraine() {
+        String treatment = editTextTreatment.getText().toString();
+        String trigger = editTextMedicine.getText().toString();
+        int pain = (int) painSlider.getValue();
+
+        if (treatment.trim().isEmpty() || trigger.trim().isEmpty()) {
+            Toast.makeText(this, "Please insert", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent data = new Intent();
+        setResult(RESULT_OK, data);
+        finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.add_migraine_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save_migraine:
+                saveMigraine();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     // Adding triggers
     // Adding pain
@@ -124,7 +141,7 @@ public class AddMigraineActivity extends AppCompatActivity {
     public void saveButtonClicked(View view) {
         date = new Date(3, 12, 2021);   // Tiedot haetaan
         time = new Time(14, 06);           // Tiedot haetaan
-        event = new MigraineEvent(date, time, pain, symptoms, medicines, treatments);
+        //event = new MigraineEvent(date, time, pain, symptoms, medicines, treatments);
         if (activeMigraineExists) {
             migraineList.getLast().addEvent(date, time, pain, symptoms, medicines, treatments);
         } else {

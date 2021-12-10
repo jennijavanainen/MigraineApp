@@ -1,9 +1,12 @@
 package fi.javanainen.migraineapp;
 
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Class represents single event in a migraine attack.
@@ -11,11 +14,16 @@ import java.util.Calendar;
  * It can also have describing attributes
  * @author Jenni Javanainen
  */
-
+@Entity(tableName = "migraine_data")
 public class MigraineEvent {
+
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+
     private Date date;
     private Time time;
     private int pain;
+
     private ArrayList<String> symptoms;
     private ArrayList<String> medicines;
     private ArrayList<String> treatments;
@@ -29,9 +37,13 @@ public class MigraineEvent {
         this.medicines = medicines;
         this.treatments = treatments;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-
-    public Date getDate() { return date; }
+    public Date getDate() {
+        return date;
+    }
 
     public Time getTime() {
         return time;

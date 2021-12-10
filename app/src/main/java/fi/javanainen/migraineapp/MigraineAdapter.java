@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MigraineAdapter extends RecyclerView.Adapter<MigraineAdapter.MigraineHolder> {
 
-    private List<Migraine> migranes = new ArrayList<>();
+    private List<MigraineEvent> migraines = new ArrayList<>();
     @NonNull
     @Override
     public MigraineAdapter.MigraineHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -24,22 +24,22 @@ public class MigraineAdapter extends RecyclerView.Adapter<MigraineAdapter.Migrai
 
     @Override
     public void onBindViewHolder(@NonNull MigraineAdapter.MigraineHolder holder, int position) {
-        Migraine currentMigraine = migranes.get(position);
-        holder.textViewDate.setText(currentMigraine.getDate());
-        holder.textViewTime.setText(currentMigraine.getTime());
-        holder.textViewTrigger.setText(currentMigraine.getTrigger());
-        holder.textViewTreatment.setText(currentMigraine.getTreatment());
-        holder.textViewPain.setText(currentMigraine.getPain());
+        MigraineEvent currentMigraineEvent = migraines.get(position);
+        holder.textViewDate.setText((CharSequence) currentMigraineEvent.getDate());
+        holder.textViewTime.setText((CharSequence) currentMigraineEvent.getTime());
+        holder.textViewTrigger.setText((CharSequence) currentMigraineEvent.getMedicines());
+        holder.textViewTreatment.setText((CharSequence) currentMigraineEvent.getTreatments());
+        holder.textViewPain.setText(currentMigraineEvent.getPain());
 
     }
 
     @Override
     public int getItemCount() {
-        return migranes.size();
+        return migraines.size();
     }
 
-    public void setMigranes(List<Migraine> migraines){
-        this.migranes = migraines;
+    public void setMigraines(List<MigraineEvent> migraines){
+        this.migraines = migraines;
         notifyDataSetChanged();
     }
 

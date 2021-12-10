@@ -13,23 +13,23 @@ import java.util.List;
 
 public class MigraineViewModel extends AndroidViewModel {
     private MigraineRepository repository;
-    private LiveData<List<Migraine>>allMigraines;
+    private LiveData<List<MigraineEvent>>allMigraines;
 
     public MigraineViewModel(@NonNull Application application) {
         super(application);
         repository = new MigraineRepository(application);
         allMigraines = repository.getAllMigraines();
     }
-    public void insert(Migraine migraine){
+    public void insert(MigraineEvent migraine){
         repository.Insert(migraine);
     }
-    public void update(Migraine migraine){
+    public void update(MigraineEvent migraine){
         repository.Update(migraine);
     }
-    public void delete(Migraine migraine){
+    public void delete(MigraineEvent migraine){
         repository.Delete(migraine);
     }
-    public LiveData<List<Migraine>>getAllMigraines(){
+    public LiveData<List<MigraineEvent>>getAllMigraines(){
         return allMigraines;
     }
 

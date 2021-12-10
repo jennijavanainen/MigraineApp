@@ -90,10 +90,10 @@
         android:hint="treatment"
         android:inputType="text"/>
     <EditText
-        android:id="@+id/edit_trigger"
+        android:id="@+id/edit_medicine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="trigger"
+        android:hint="medicine"
         android:inputType="text"/>
     <TextView
         android:id="@+id/edit_pain"

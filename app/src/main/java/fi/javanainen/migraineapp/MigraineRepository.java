@@ -8,63 +8,63 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class MigraineRepository {
-    private MigraineDao migraineDao;
+    private MigraineEventDao migraineEventDao;
 
-    private LiveData <List<Migraine>> allMigraines;
+    private LiveData <List<MigraineEvent>> allMigraines;
 
     public MigraineRepository(Application application){
         AppDatabase database = AppDatabase.getInstance(application);
-        migraineDao = database.migraineDao();
-        allMigraines = migraineDao.getAll();
+        migraineEventDao = database.migraineEventDao();
+        allMigraines = migraineEventDao.getAll();
     }
-    public void Insert(Migraine migraine){
-        new InsertMigraineAsyncTask(migraineDao).execute(migraine);
+    public void Insert(MigraineEvent migraine){
+        new InsertMigraineAsyncTask(migraineEventDao).execute(migraine);
     }
-    public void Update(Migraine migraine){
-        new UpdateMigraineAsyncTask(migraineDao).execute(migraine);
+    public void Update(MigraineEvent migraine){
+        new UpdateMigraineAsyncTask(migraineEventDao).execute(migraine);
     }
-    public void Delete(Migraine migraine){
-        new DeleteMigraineAsyncTask(migraineDao).execute(migraine);
+    public void Delete(MigraineEvent migraine){
+        new DeleteMigraineAsyncTask(migraineEventDao).execute(migraine);
     }
-    public LiveData<List<Migraine>>getAllMigraines(){
+    public LiveData<List<MigraineEvent>>getAllMigraines(){
         return allMigraines;
     }
-    private static class InsertMigraineAsyncTask extends AsyncTask<Migraine, Void, Void>{
+    private static class InsertMigraineAsyncTask extends AsyncTask<MigraineEvent, Void, Void>{
 
-        private MigraineDao migraineDao;
+        private MigraineEventDao migraineEventDao;
 
-        private InsertMigraineAsyncTask(MigraineDao migraineDao){
-            this.migraineDao = migraineDao;
+        private InsertMigraineAsyncTask(MigraineEventDao migraineDao){
+            this.migraineEventDao = migraineDao;
         }
         @Override
-        protected Void doInBackground(Migraine...migraines){
-            migraineDao.insertAll(migraines[0]);
+        protected Void doInBackground(MigraineEvent...migraines){
+            migraineEventDao.insertAll(migraines[0]);
             return null;
         }
     }
-    private static class UpdateMigraineAsyncTask extends AsyncTask<Migraine, Void, Void>{
+    private static class UpdateMigraineAsyncTask extends AsyncTask<MigraineEvent, Void, Void>{
 
-        private MigraineDao migraineDao;
+        private MigraineEventDao migraineEventDao;
 
-        private UpdateMigraineAsyncTask(MigraineDao migraineDao){
-            this.migraineDao = migraineDao;
+        private UpdateMigraineAsyncTask(MigraineEventDao migraineEventDao){
+            this.migraineEventDao = migraineEventDao;
         }
         @Override
-        protected Void doInBackground(Migraine...migraines){
-            migraineDao.update(migraines[0]);
+        protected Void doInBackground(MigraineEvent...migraines){
+            migraineEventDao.update(migraines[0]);
             return null;
         }
     }
-    private static class DeleteMigraineAsyncTask extends AsyncTask<Migraine, Void, Void>{
+    private static class DeleteMigraineAsyncTask extends AsyncTask<MigraineEvent, Void, Void>{
 
-        private MigraineDao migraineDao;
+        private MigraineEventDao migraineEventDao;
 
-        private DeleteMigraineAsyncTask(MigraineDao migraineDao){
-            this.migraineDao = migraineDao;
+        private DeleteMigraineAsyncTask(MigraineEventDao migraineDao){
+            this.migraineEventDao = migraineDao;
         }
         @Override
-        protected Void doInBackground(Migraine...migraines){
-            migraineDao.delete(migraines[0]);
+        protected Void doInBackground(MigraineEvent...migraines){
+            migraineEventDao.delete(migraines[0]);
             return null;
         }
     }

@@ -6,22 +6,21 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
 import java.util.List;
 
-import fi.javanainen.migraineapp.Migraine;
+
 
 @Dao
-public interface MigraineDao  {
+public interface MigraineEventDao {
     @Insert
-    void insertAll(Migraine migraine);
+    void insertAll(MigraineEvent migraineEvent);
 
     @Delete
-    void delete(Migraine migraine);
+    void delete(MigraineEvent migraineEvent);
 
     @Update
-    void update(Migraine migraine);
+    void update(MigraineEvent migraineEvent);
 
     @Query("SELECT * FROM migraine_data ORDER BY id ASC")
-    LiveData<List<Migraine>> getAll();
+    LiveData<List<MigraineEvent>> getAll();
 }
