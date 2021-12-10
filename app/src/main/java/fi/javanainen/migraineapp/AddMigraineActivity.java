@@ -51,14 +51,16 @@ public class AddMigraineActivity extends AppCompatActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH) + 1;
         mDay = c.get(Calendar.DAY_OF_MONTH);
+        // Luodaan uudi Date-olio
         date = new Date(mDay,mMonth,mYear);
         txtDate.setText(date.toString());
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
+        // Luodaan uusi Time-olio
         time = new Time(mHour,mMinute);
         txtTime.setText(time.toString());
 
-        // get activeMigraineExists from database
+        // Täytyy hakea activeMigraineExists tietokannasta!
     }
 
     // Adding triggers (only when adding new migraine)
@@ -85,7 +87,7 @@ public class AddMigraineActivity extends AppCompatActivity {
         }
 
         // Save info to database
-        // (also activeMigraineExists!)
+        // (also activeMigraineExists)
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
