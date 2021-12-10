@@ -15,7 +15,9 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.TextView;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,6 +50,7 @@ public class AddMigraineActivity extends AppCompatActivity {
         txtDate=(TextView) findViewById(R.id.in_date);
         txtTime=(TextView) findViewById(R.id.in_time);
 
+
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH) + 1;
         mDay = c.get(Calendar.DAY_OF_MONTH);
@@ -59,6 +62,7 @@ public class AddMigraineActivity extends AppCompatActivity {
         txtTime.setText(time.toString());
 
         // get activeMigraineExists from database
+        // get activemigraineexists
     }
 
     // Adding triggers (only when adding new migraine)
@@ -75,6 +79,7 @@ public class AddMigraineActivity extends AppCompatActivity {
      * @param view saveButton
      */
     public void saveButtonClicked(View view) {
+
         event = new MigraineEvent(date, time, pain, symptoms, medicines, treatments);
         if (activeMigraineExists) {
             migraineList.getLast().addEvent(date, time, pain, symptoms, medicines, treatments);
@@ -104,6 +109,8 @@ public class AddMigraineActivity extends AppCompatActivity {
                     date.setYear(year);
                     txtDate.setText(date.toString());
                 }, mYear, mMonth, mDay);
+
+
         datePickerDialog.show();
 
     }
@@ -119,6 +126,7 @@ public class AddMigraineActivity extends AppCompatActivity {
                     time.setMinutes(minute);
                     txtTime.setText(time.toString());
                 }, mHour, mMinute, true);
+
         timePickerDialog.show();
     }
 
