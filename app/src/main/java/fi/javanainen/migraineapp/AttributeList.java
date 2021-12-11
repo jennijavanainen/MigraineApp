@@ -55,5 +55,6 @@ public class AttributeList {
     public ArrayList<String> getTreatments() {
         return treatments;
     }
+
 }
 
