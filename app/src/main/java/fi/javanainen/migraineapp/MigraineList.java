@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class MigraineList {
     private static final MigraineList ourInstance = new MigraineList();
     private ArrayList<Migraine> migraineList;
+    private boolean activeMigraineExists;
 
 
     public MigraineList() {
@@ -51,6 +52,10 @@ public class MigraineList {
      */
     public Migraine getLast() {
         return migraineList.get(migraineList.size() - 1);
+    }
+
+    public boolean getActiveMigraineExists() {
+        return activeMigraineExists;
     }
 
 }

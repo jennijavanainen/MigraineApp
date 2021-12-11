@@ -13,7 +13,7 @@
             android:name=".HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".StartActivity"
+            android:name=".EditAttributesActivity"
             android:exported="false" />
         <activity
             android:name=".AddMigraineActivity"

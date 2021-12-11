@@ -64,6 +64,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddMigraineActivity.class);
         startActivity(intent);
     }
-
-
 }

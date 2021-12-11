@@ -9,13 +9,18 @@
     <string name="select_time">Edit time</string>
     <string name="text_date">Date</string>
     <string name="text_time">Time</string>
-    <string name="start_header">Tell us about yourself</string>
+    <string name="start_header">Insert information</string>
     <string name="triggers_text">What sort of things trigger your migraine?</string>
     <string name="triggers_hint">E.g. dehydration</string>
-    <string name="symptoms_text">What kind of symptoms do you have during migraine attack?</string>
+    <string name="symptoms_text">What kind of migraine symptoms do you have?</string>
     <string name="symptoms_hint">E.g. nausea</string>
-    <string name="medicines_text">Which medicines do you usefor treatment?</string>
+    <string name="medicines_text">Which medicines do you use for treatment?</string>
     <string name="medicines_hint">E.g. Paracetamol 500mg</string>
-    <string name="treatments_text">Any other treatments that ease your migraine?</string>
+    <string name="treatments_text">What non-medical treatments do you use?</string>
     <string name="treatments_hint">E.g. nap</string>
+    <string name="edit_triggers">Edit Your Triggers</string>
+    <string name="edit_symptoms">Edit Your Symptoms</string>
+    <string name="edit_medicines">Edit Your Medicines</string>
+    <string name="edit_treatments">Edit Your Treatments</string>
+
 </resources>
