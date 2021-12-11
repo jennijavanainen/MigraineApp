@@ -2,22 +2,20 @@ package fi.javanainen.migraineapp;
 
 import static android.view.View.generateViewId;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-
 import java.util.ArrayList;
 
 /**
@@ -37,6 +35,7 @@ public class EditAttributesActivity extends AppCompatActivity {
     //Views
     EditText userInput;
     TextView inputInfoText;
+    TextView infoPanel;
 
     private String attribute;
     private String id;
@@ -56,9 +55,9 @@ public class EditAttributesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra(SettingsActivity.SEND_MESSAGE);
         list = getCorrectList(id);
-
         userInput = findViewById(R.id.userInput);
         inputInfoText = findViewById(R.id.inputInfoText);
+        infoPanel = findViewById(R.id.infoPanel);
 
         setInputText(id);
 
@@ -68,9 +67,28 @@ public class EditAttributesActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     attribute = userInput.getText().toString();
-                    addButton(attribute);
-                    addToList(attribute);
-                    return true;
+                    userInput.setNextFocusDownId(userInput.getId());
+
+                    // Validate input
+                    if (attribute.length() > 20) {
+                        infoPanel.setVisibility(View.VISIBLE);
+                        infoPanel.setText(R.string.info_long_word);
+                    }
+                    else if (list.contains(attribute)) {
+                        infoPanel.setVisibility(View.VISIBLE);
+                        infoPanel.setText(R.string.info_item_exists);
+                    } else if (list.size() >= 10) {
+                        infoPanel.setVisibility(View.VISIBLE);
+                        infoPanel.setText(R.string.info_exceeds);
+                    }
+                    else {
+                        infoPanel.setVisibility(View.INVISIBLE);
+                        addButton(attribute);
+                        addToList(attribute);
+                        userInput.getText().clear();
+                        userInput.requestFocus();
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -91,6 +109,7 @@ public class EditAttributesActivity extends AppCompatActivity {
     public void addButton(String input){
         Button newButton = new Button(this);
         Flow flow = findViewById(R.id.flow);
+        flow.setWrapMode(Flow.WRAP_ALIGNED );
         newButton.setText(input);
         newButton.setId(generateViewId());
         ConstraintLayout layout = findViewById(R.id.layout);
@@ -160,8 +179,6 @@ public class EditAttributesActivity extends AppCompatActivity {
      * @param attribute String
      */
     public void addToList(String attribute) {
-        // check if exists!
-
         list.add(attribute);
     }
 
