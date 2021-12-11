@@ -14,7 +14,7 @@
             android:exported="false" />
         <activity
             android:name=".EditAttributesActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT.ACTIVITY"
                 android:value=".SettingsActivity" />
