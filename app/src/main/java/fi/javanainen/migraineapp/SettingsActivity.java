@@ -14,6 +14,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 
+/**
+ * @author Jenni Javanainen
+ */
+
 public class SettingsActivity extends AppCompatActivity {
     private BottomNavigationView navBar;
     public static final String SEND_MESSAGE = "listItem";
