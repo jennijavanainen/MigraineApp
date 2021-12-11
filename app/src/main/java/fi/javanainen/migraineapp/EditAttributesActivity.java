@@ -20,6 +20,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * In the activity user can add and remove their personal migraine attributes.
+ * The activity shows different information depending on which button was clicked on SettingsActivity.
+ * Tutorial used: https://stackoverflow.com/questions/57100375/can-i-add-number-of-buttons-in-runtime-depending-on-a-variable-and-not-in-xml/57100637
+ * @author Jenni Javanainen
+ */
+
 public class EditAttributesActivity extends AppCompatActivity {
     private AttributeList attributes;
     private ArrayList<String> triggers;
@@ -33,22 +40,25 @@ public class EditAttributesActivity extends AppCompatActivity {
 
     private String attribute;
     private String id;
+    ArrayList<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_attributes);
         attributes = AttributeList.getInstance();
-        triggers = AttributeList.getInstance().getTriggers();
-        symptoms = AttributeList.getInstance().getSymptoms();
-        medicines = AttributeList.getInstance().getMedicines();
-        treatments = AttributeList.getInstance().getTreatments();
+        triggers = attributes.getTriggers();
+        symptoms = attributes.getSymptoms();
+        medicines = attributes.getMedicines();
+        treatments = attributes.getTreatments();
+
+        // Id will be received from SettingsActivity
+        Intent intent = getIntent();
+        id = intent.getStringExtra(SettingsActivity.SEND_MESSAGE);
+        list = getCorrectList(id);
 
         userInput = findViewById(R.id.userInput);
         inputInfoText = findViewById(R.id.inputInfoText);
-
-        Intent intent = getIntent();
-        id = intent.getStringExtra(SettingsActivity.SEND_MESSAGE);
 
         setInputText(id);
 
@@ -59,28 +69,39 @@ public class EditAttributesActivity extends AppCompatActivity {
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     attribute = userInput.getText().toString();
                     addButton(attribute);
-                    addToList(attribute, id);
-
+                    addToList(attribute);
                     return true;
                 }
                 return false;
             }
         });
 
+        // Adding previous attributes from the list
+        for (String attribute: list) {
+            addButton(attribute);
+        }
+
     }
 
+    /**
+     * Method takes user input and creates a new button to be displayed in the flow-section of the app.
+     * OnClick-method is created for each button, so that they can be removed by clicking the button again.
+     * @param input String user input
+     */
     public void addButton(String input){
         Button newButton = new Button(this);
         Flow flow = findViewById(R.id.flow);
         newButton.setText(input);
         newButton.setId(generateViewId());
         ConstraintLayout layout = findViewById(R.id.layout);
+        // Add params for the button
         newButton.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         newButton.setText(input);
+
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeFromList(newButton.getText().toString(), id);
+                removeFromList(newButton.getText().toString());
                 flow.removeView(newButton);
                 layout.removeView(newButton);
             }
@@ -90,7 +111,10 @@ public class EditAttributesActivity extends AppCompatActivity {
         flow.addView(newButton);
     }
 
-
+    /**
+     * Method receives an id, that defines what information is shown in the activity
+     * @param id String identifier from previous activity
+     */
     public void setInputText(String id) {
         switch (id) {
             case "triggers":
@@ -112,41 +136,47 @@ public class EditAttributesActivity extends AppCompatActivity {
         }
     }
 
-    public void addToList(String attribute, @NonNull String id) {
+    /**
+     * Method returns the ArrayList that will be used in this activity, based on the id
+     * @param id String identifier from previous activity
+     * @return ArrayList
+     */
+    public ArrayList<String> getCorrectList(String id) {
         switch (id) {
             case "triggers":
-                triggers.add(attribute);
-                break;
+                return triggers;
             case "symptoms":
-                symptoms.add(attribute);
-                break;
+                return symptoms;
             case "medicines":
-                medicines.add(attribute);
-                break;
+                return medicines;
             case "treatments":
-                treatments.add(attribute);
-                break;
+                return treatments;
         }
+        return null;
     }
 
-    public void removeFromList(String attribute, @NonNull String id) {
-        switch (id) {
-            case "triggers":
-                triggers.remove(attribute);
-                break;
-            case "symptoms":
-                symptoms.remove(attribute);
-                break;
-            case "medicines":
-                medicines.remove(attribute);
-                break;
-            case "treatments":
-                treatments.remove(attribute);
-                break;
-        }
+    /**
+     * Method adds the given parameter String to the list used in this Activity
+     * @param attribute String
+     */
+    public void addToList(String attribute) {
+        // check if exists!
+
+        list.add(attribute);
     }
 
+    /**
+     * Method removes the given parameter String from the list used in this Activity
+     * @param attribute String
+     */
+    public void removeFromList(String attribute) {
+        list.remove(attribute);
+    }
 
+    /**
+     * When button is clicked, SettingsActivity opens
+     * @param view Button
+     */
     public void saveButtonClicked(View view) {
 
 
