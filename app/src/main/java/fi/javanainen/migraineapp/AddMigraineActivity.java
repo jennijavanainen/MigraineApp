@@ -185,6 +185,7 @@ public class AddMigraineActivity extends AppCompatActivity {
 
         }
     }
+
     public void addMedicinesButtons(MigraineEvent event){
 
         for (String medicine:event.getMedicines()) {
