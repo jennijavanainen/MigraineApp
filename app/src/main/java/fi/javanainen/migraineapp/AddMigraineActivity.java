@@ -15,6 +15,8 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -60,10 +62,13 @@ public class AddMigraineActivity extends AppCompatActivity {
         time = new Time(mHour,mMinute);
         txtTime.setText(time.toString());
 
-        // Täytyy hakea activeMigraineExists tietokannasta!
+        addTriggerButtons();
+        showEvents();
+
+        // get activemigraineexists
     }
 
-    // Adding triggers (only when adding new migraine)
+    // Adding triggers
     // Adding pain
     // Adding symptoms
     // Adding medicines
@@ -122,6 +127,78 @@ public class AddMigraineActivity extends AppCompatActivity {
                     txtTime.setText(time.toString());
                 }, mHour, mMinute, true);
         timePickerDialog.show();
+    }
+
+    public void addTriggerButtons(){
+
+        for (String trigger:migraineList.getLast().getTriggers()) {
+
+
+            Button myButton = new Button(this);
+            myButton.setText(trigger);
+
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layout.addView(myButton, lp);
+
+
+        }
+    }
+    public void showEvents(){
+
+        for (MigraineEvent event:migraineList.getLast().getEvents()) {
+
+            addSymptomsButtons(event);
+            addTreatmentsButtons(event);
+            addMedicinesButtons(event);
+
+        }
+
+    }
+    public void addSymptomsButtons(MigraineEvent event){
+
+        for (String symptom:event.getSymptoms()) {
+
+
+            Button myButton = new Button(this);
+            myButton.setText(symptom);
+
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layout.addView(myButton, lp);
+
+
+        }
+    }
+    public void addTreatmentsButtons(MigraineEvent event){
+
+        for (String treatment:event.getTreatments()) {
+
+
+            Button myButton = new Button(this);
+            myButton.setText(treatment);
+
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layout.addView(myButton, lp);
+
+
+        }
+    }
+    public void addMedicinesButtons(MigraineEvent event){
+
+        for (String medicine:event.getMedicines()) {
+
+
+            Button myButton = new Button(this);
+            myButton.setText(medicine);
+
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layout.addView(myButton, lp);
+
+
+        }
     }
 
 

@@ -6,81 +6,99 @@
     android:layout_height="match_parent"
     tools:context=".AddMigraineActivity">
 
-    <TextView
-        android:id="@+id/in_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/text_date"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_date"
-        app:layout_constraintEnd_toStartOf="@+id/btn_date"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-107dp"
+        tools:layout_editor_absoluteY="55dp">
 
-    <Button
-        android:id="@+id/btn_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/in_date"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="16dp"
-        android:layout_toEndOf="@+id/in_date"
-        android:layout_toRightOf="@+id/in_date"
-        android:onClick="selectDate"
-        android:text="@string/select_date"
-        app:layout_constraintBottom_toTopOf="@+id/btn_time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/in_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/in_date"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/text_time"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_time"
-        app:layout_constraintEnd_toStartOf="@+id/btn_time"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="42dp"
+                android:layout_marginVertical="16dp">
 
-    <Button
-        android:id="@+id/btn_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_date"
-        android:layout_alignStart="@+id/btn_date"
-        android:layout_alignLeft="@+id/btn_date"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="selectTime"
-        android:text="@string/select_time"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_date" />
+                <TextView
+                    android:id="@+id/in_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/text_date"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/btn_date"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_date"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
-    <Button
-        android:id="@+id/saveMigraineButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:onClick="saveButtonClicked"
-        android:text="@string/save_migraine_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+                <Button
+                    android:id="@+id/btn_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/in_date"
+
+                    android:layout_toEndOf="@+id/in_date"
+                    android:onClick="selectDate"
+                    android:text="@string/select_date"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_time"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/in_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/in_date"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/text_time"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/btn_time"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_time"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/btn_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btn_date"
+                    android:layout_alignStart="@+id/btn_date"
+                    android:layout_alignLeft="@+id/btn_date"
+                    android:layout_marginTop="16dp"
+                    android:onClick="selectTime"
+                    android:text="@string/select_time"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_date" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
+            <Button
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/saveMigraineButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="saveButtonClicked"
+                android:text="@string/save_migraine_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        </LinearLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

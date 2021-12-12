@@ -15,16 +15,7 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
-@Entity
 public class Migraine {
-    @PrimaryKey
-    public int id;
-
-    public String date;
-    public String time;
-    public String pain;
-
 
     private ArrayList<String> triggers;
     private ArrayList<MigraineEvent> events;
