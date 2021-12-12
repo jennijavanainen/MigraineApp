@@ -22,7 +22,13 @@ public class MigraineList {
         triggers.add("aurinko");
         triggers.add("darra");
         ArrayList<String> symptoms = new ArrayList<>();
+        symptoms.add("päänsärky");
+        symptoms.add("oksetus");
+        symptoms.add("neusea");
+        symptoms.add("känkkäränkkä");
         ArrayList<String> medicines = new ArrayList<>();
+        medicines.add("ibuprofeiini");
+        medicines.add("miranax");
         ArrayList<String> treatments = new ArrayList<>();
 
         migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(1, 12, 2021), new Time(11, 55), 5, symptoms, medicines, treatments )));
