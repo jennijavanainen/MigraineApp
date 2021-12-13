@@ -3,7 +3,10 @@ package fi.javanainen.migraineapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -23,10 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView navBar;
     private MigraineList migraineList;
+    private boolean activeMigraineExists;
+
     private TextView averageNumber;
     private TextView lastMigraine;
     private TextView migrainesTotalNumber;
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -35,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         migraineList = MigraineList.getInstance();
         addNavbar();
+
+        SharedPreferences prefGet = getSharedPreferences("MigrainePref", Activity.MODE_PRIVATE);
+        activeMigraineExists = prefGet.getBoolean("activeMigraineExists", false);
+        migraineList.setActiveMigraineExists(activeMigraineExists);
 
         averageNumber = findViewById(R.id.averageNumber);
         averageNumber.setText(migraineList.toStringForm(migraineList.getAvgInMinutes()));

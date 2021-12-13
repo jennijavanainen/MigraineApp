@@ -40,6 +40,7 @@ public class MigraineList {
         migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(1, 12, 2021), new Time(11, 55), 5, symptoms, medicines, treatments )));
         migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(2, 12, 2021), new Time(12, 45), 5, symptoms, medicines, treatments )));
         getLast().addEvent(new Date(3,12,2021), new Time(12,55), 5, symptoms, medicines, treatments);
+
         c = Calendar.getInstance();
     }
 
@@ -71,7 +72,9 @@ public class MigraineList {
         return activeMigraineExists;
     }
 
-    public ArrayList<Migraine> getMigraines(){
+    public void setActiveMigraineExists(boolean a) { this.activeMigraineExists = a; }
+
+    public ArrayList<Migraine> getMigraines() {
         return migraineList;
     }
 

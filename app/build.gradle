@@ -30,6 +30,7 @@ android {
 dependencies {
     // Jennin lisäämä juttu
     implementation 'androidx.room:room-common:2.2.6'
+    implementation files('libs\\gson-2.8.9.jar')
 
     def room_version = "2.3.0"
 

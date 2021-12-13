@@ -87,7 +87,6 @@ public class AddMigraineActivity extends AppCompatActivity {
     // Adding medicines
     // Adding treatments
 
-
     /**
      * Method creates MigraineEvent object with parameters given by the user.
      * If active Migraine does not exist, the method creates it as well.
