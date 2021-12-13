@@ -25,5 +25,9 @@
     <string name="info_item_exists">Input already exists</string>
     <string name="info_exceeds">Maximum 10 attributes allowed</string>
     <string name="info_long_word">Maximum 20 characters allowed</string>
+    <string name="info_empty">Please insert valid attribute</string>
+    <string name="average_text">Average migraine attack length:</string>
+    <string name="last_migraine_text">The date of your last migraine:</string>
+    <string name="migraines_total_text">Number of migraines in the last 30 days:</string>
 
 </resources>

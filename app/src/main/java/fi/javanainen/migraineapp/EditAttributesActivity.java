@@ -69,18 +69,29 @@ public class EditAttributesActivity extends AppCompatActivity {
                     attribute = userInput.getText().toString();
                     userInput.setNextFocusDownId(userInput.getId());
 
-                    // Validate input
-                    if (attribute.length() > 20) {
+                    // Input validation
+
+                    // Empty input
+                    if (attribute.trim().isEmpty()) {
+                        infoPanel.setVisibility(View.VISIBLE);
+                        infoPanel.setText(R.string.info_empty);
+                    }
+                    // Max 20 characters in one input
+                     else if (attribute.length() > 20) {
                         infoPanel.setVisibility(View.VISIBLE);
                         infoPanel.setText(R.string.info_long_word);
                     }
-                    else if (list.contains(attribute)) {
+                    // Duplicate input
+                    else if (list.contains(attribute.trim())) {
                         infoPanel.setVisibility(View.VISIBLE);
                         infoPanel.setText(R.string.info_item_exists);
-                    } else if (list.size() >= 10) {
+                    }
+                    // Max 10 attributes allowed
+                    else if (list.size() >= 10) {
                         infoPanel.setVisibility(View.VISIBLE);
                         infoPanel.setText(R.string.info_exceeds);
                     }
+                    // Valid input
                     else {
                         infoPanel.setVisibility(View.INVISIBLE);
                         addButton(attribute);

@@ -3,16 +3,16 @@
     <item
         android:id="@+id/main"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/home_icon"
         android:title="@string/main_menu_item"/>
     <item
         android:id="@+id/history"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/history_icon"
         android:title="@string/stats_menu_item"/>
     <item
         android:id="@+id/settings"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/settings_icon"
         android:title="@string/settings_menu_item"/>
 </menu>

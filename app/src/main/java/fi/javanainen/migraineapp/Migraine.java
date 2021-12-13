@@ -53,16 +53,15 @@ public class Migraine {
      * @return Time the difference in hours and minutes
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public Time getLength() {
+    public int getLength() {
         Calendar first = events.get(0).getCalendar();
         Calendar last = events.get(events.size() - 1).getCalendar();
         long millis1 = last.getTimeInMillis();
         long millis2 = first.getTimeInMillis();
         long diff = Math.abs(millis2 - millis1);
-        int hours = Math.toIntExact(diff / (60 * 60 * 1000));
-        int minutes = Math.toIntExact(diff / (60 * 1000) % 60);
+        int minutes = Math.toIntExact(diff / (60 * 1000)) ;
 
-        return new Time(hours, minutes);
+        return minutes;
     }
 
     /**
@@ -72,4 +71,9 @@ public class Migraine {
     public MigraineEvent getLastEvent() {
         return events.get(events.size() - 1);
     }
+
+    public MigraineEvent getFirstEvent() { return events.get(0); }
+
+
 }
+
