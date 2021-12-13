@@ -60,5 +60,21 @@ public class AttributeList {
         return treatments;
     }
 
+    public void removeTrigger(String attribute) {
+        triggers.remove(attribute);
+    }
+
+    public void removeSymptom(String attribute) {
+        symptoms.remove(attribute);
+    }
+
+    public void removeMedicine(String attribute) {
+        medicines.remove(attribute);
+    }
+
+    public void removeTreatment(String attribute) {
+        treatments.remove(attribute);
+    }
+
 }
 

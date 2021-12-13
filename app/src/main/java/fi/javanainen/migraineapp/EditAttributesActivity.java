@@ -8,15 +8,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
+import com.google.gson.Gson;
+
+
 
 /**
  * In the activity user can add and remove their personal migraine attributes.
@@ -27,15 +31,17 @@ import java.util.ArrayList;
 
 public class EditAttributesActivity extends AppCompatActivity {
     private AttributeList attributes;
-    private ArrayList<String> triggers;
-    private ArrayList<String> symptoms;
-    private ArrayList<String> medicines;
-    private ArrayList<String> treatments;
+    private Gson gson;
+    private String savedTriggers;
+    private String savedSymptoms;
+    private String savedMedicines;
+    private String savedTreatments;
 
     //Views
     EditText userInput;
     TextView inputInfoText;
     TextView infoPanel;
+    Button saveButton;
 
     private String attribute;
     private String id;
@@ -46,10 +52,7 @@ public class EditAttributesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_attributes);
         attributes = AttributeList.getInstance();
-        triggers = attributes.getTriggers();
-        symptoms = attributes.getSymptoms();
-        medicines = attributes.getMedicines();
-        treatments = attributes.getTreatments();
+        gson = new Gson();
 
         // Id will be received from SettingsActivity
         Intent intent = getIntent();
@@ -58,8 +61,31 @@ public class EditAttributesActivity extends AppCompatActivity {
         userInput = findViewById(R.id.userInput);
         inputInfoText = findViewById(R.id.inputInfoText);
         infoPanel = findViewById(R.id.infoPanel);
+        saveButton = findViewById(R.id.saveButton);
 
         setInputText(id);
+
+        // Save button listener
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                savedTriggers = gson.toJson(attributes.getTriggers());
+                savedSymptoms = gson.toJson(attributes.getSymptoms());
+                savedMedicines = gson.toJson(attributes.getMedicines());
+                savedTreatments = gson.toJson(attributes.getTreatments());
+
+                SharedPreferences prefPut = getSharedPreferences("MigrainePref",Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefEditor = prefPut.edit();
+                prefEditor.putString("triggers", savedTriggers);
+                prefEditor.putString("symptoms", savedSymptoms);
+                prefEditor.putString("medicines", savedMedicines);
+                prefEditor.putString("treatments", savedTreatments);
+                prefEditor.commit();
+
+                // Back to SettingsActivity
+                Intent intent = new Intent(EditAttributesActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Adding Listener to the user input field
         userInput.setOnKeyListener(new View.OnKeyListener() {
@@ -95,7 +121,7 @@ public class EditAttributesActivity extends AppCompatActivity {
                     else {
                         infoPanel.setVisibility(View.INVISIBLE);
                         addButton(attribute);
-                        addToList(attribute);
+                        addToList(attribute, id);
                         userInput.getText().clear();
                         userInput.requestFocus();
                         return true;
@@ -174,13 +200,13 @@ public class EditAttributesActivity extends AppCompatActivity {
     public ArrayList<String> getCorrectList(String id) {
         switch (id) {
             case "triggers":
-                return triggers;
+                return attributes.getTriggers();
             case "symptoms":
-                return symptoms;
+                return attributes.getSymptoms();
             case "medicines":
-                return medicines;
+                return attributes.getMedicines();
             case "treatments":
-                return treatments;
+                return attributes.getTreatments();
         }
         return null;
     }
@@ -189,8 +215,21 @@ public class EditAttributesActivity extends AppCompatActivity {
      * Method adds the given parameter String to the list used in this Activity
      * @param attribute String
      */
-    public void addToList(String attribute) {
-        list.add(attribute);
+    public void addToList(String attribute, String id) {
+        switch (id) {
+            case "triggers":
+                attributes.addTrigger(attribute);
+                break;
+            case "symptoms":
+                attributes.addSymptom(attribute);
+                break;
+            case "medicines":
+                attributes.addMedicine(attribute);
+                break;
+            case "treatments":
+                attributes.addTreatment(attribute);
+                break;
+        }
     }
 
     /**
@@ -198,20 +237,21 @@ public class EditAttributesActivity extends AppCompatActivity {
      * @param attribute String
      */
     public void removeFromList(String attribute) {
-        list.remove(attribute);
+        switch (id) {
+            case "triggers":
+                attributes.removeTrigger(attribute);
+                break;
+            case "symptoms":
+                attributes.removeSymptom(attribute);
+                break;
+            case "medicines":
+                attributes.removeMedicine(attribute);
+                break;
+            case "treatments":
+                attributes.removeTreatment(attribute);
+                break;
+        }
     }
-
-    /**
-     * When button is clicked, SettingsActivity opens
-     * @param view Button
-     */
-    public void saveButtonClicked(View view) {
-
-
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
 
 
 

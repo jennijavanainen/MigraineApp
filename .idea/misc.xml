@@ -3,19 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_add_migraine.xml" value="0.1" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_edit_attributes.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_history.xml" value="0.2" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_settings.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_start.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/add_migraine_item.xml" value="0.24270833333333333" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/add_migrane_menu.xml" value="0.25025641025641027" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/migraine_item.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/migrane_item.xml" value="0.264" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/view_migraine_history.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/menu/add_migraine_menu.xml" value="0.25025641025641027" />
-        <entry key="..\:/Users/Teemu/AndroidStudioProjects/MigraineApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.152" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/drawable/selector.xml" value="0.162890625" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_add_migraine.xml" value="0.22" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_edit_attributes.xml" value="0.269921875" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_history.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_settings.xml" value="0.22" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/activity_start.xml" value="0.269921875" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/fragment_algorithm.xml" value="0.1508401719421649" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/fragment_course.xml" value="0.1508401719421649" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/fragment_login.xml" value="0.1508401719421649" />
+        <entry key="..\:/Users/jenni/AndroidStudioProjects/MigraineApp/app/src/main/res/layout/settings_layout.xml" value="0.269921875" />
       </map>
     </option>
   </component>
