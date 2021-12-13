@@ -85,7 +85,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"

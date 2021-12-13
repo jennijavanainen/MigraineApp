@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,9 +19,14 @@ import com.google.android.material.navigation.NavigationBarView;
  */
 
 public class MainActivity extends AppCompatActivity {
+    //public static final String ICON = "icon";
+
     private BottomNavigationView navBar;
-    private TextView test;
     private MigraineList migraineList;
+    private TextView averageNumber;
+    private TextView lastMigraine;
+    private TextView migrainesTotalNumber;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -30,11 +36,22 @@ public class MainActivity extends AppCompatActivity {
         migraineList = MigraineList.getInstance();
         addNavbar();
 
+        averageNumber = findViewById(R.id.averageNumber);
+        averageNumber.setText(migraineList.toStringForm(migraineList.getAvgInMinutes()));
+        lastMigraine = findViewById(R.id.lastMigraineNumber);
+        lastMigraine.setText(migraineList.getLast().getLastEvent().getDate().toString());
+        migrainesTotalNumber = findViewById(R.id.migrainesTotalNumber);
+        migrainesTotalNumber.setText(Integer.toString(migraineList.howManyMigraines(30)));
 
     }
 
+
+
     /**
      * Adds bottom navbar to the Activity.
+     * Main icon https://freeicons.io/material-icons-action/home-icon-15944
+     * History icon https://freeicons.io/common-style-icons-14/stats-icon-14529
+     * Settings icon https://freeicons.io/free-setting-and-configuration-icons/settings-icon-9631
      */
     public void addNavbar() {
         navBar = findViewById(R.id.bottom_navigation);
