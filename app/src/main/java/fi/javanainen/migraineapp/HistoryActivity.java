@@ -2,18 +2,27 @@ package fi.javanainen.migraineapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity implements SelectListener{
     private BottomNavigationView navBar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +30,29 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         addNavbar();
 
-
+        DisplayItems();
     }
+    RecyclerView recyclerView;
+    ArrayList<MigraineList> migraineList;
+    CustomAdapter customAdapter;
+
+
+
+    private void DisplayItems(){
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
+
+        migraineList = new ArrayList<>();
+
+        //???
+        //migraineList.add(migraineList());
+
+        customAdapter = new CustomAdapter(this, migraineList, this);
+
+        recyclerView.setAdapter(customAdapter);
+    }
+
 
     /**
      * Adds bottom navbar to the Activity.
@@ -45,5 +75,13 @@ public class HistoryActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+
+    @Override
+    public void onItemClicked(MigraineList migraineList) {
+        Intent intent = new Intent(this, ViewHistoryActivity.class);
+
+        startActivity(intent);
     }
 }
