@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">HEADgehog</string>
     <string name="save_migraine_button">Save</string>
-    <string name="add_new_migraine_button">Add migraine</string>
+    <string name="add_new_migraine_button">Create new migraine log</string>
+    <string name="edit_migraine_button">Log new migraine event</string>
     <string name="main_menu_item">Main</string>
     <string name="stats_menu_item">History</string>
     <string name="settings_menu_item">Settings</string>

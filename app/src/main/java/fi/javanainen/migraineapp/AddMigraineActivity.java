@@ -193,13 +193,21 @@ public class AddMigraineActivity extends AppCompatActivity {
             layout.addView(triggerButton, lp);
 
             triggerButton.setOnClickListener(new View.OnClickListener() {
+                int clicks = 0;
                 @Override
                 public void onClick(View v) {
 
-                    triggerButton.setBackgroundColor(Color.CYAN);
-                    if(!triggers.contains(trigger)) {
-                        symptoms.add(trigger);
+                    if (clicks % 2 == 0) {
+                        triggerButton.setBackgroundColor(Color.CYAN);
+                        if(!triggers.contains(trigger)) {
+                            symptoms.add(trigger);
+                        }
+                    } else {
+                        triggerButton.setBackgroundColor(Color.LTGRAY);
+                        symptoms.remove(trigger);
                     }
+
+                    clicks++;
                 }
             });
         }
@@ -221,13 +229,21 @@ public class AddMigraineActivity extends AppCompatActivity {
             layout.addView(symptomsButton, lp);
 
             symptomsButton.setOnClickListener(new View.OnClickListener() {
+                int clicks = 0;
                 @Override
                 public void onClick(View v) {
 
-                    symptomsButton.setBackgroundColor(Color.CYAN);
-                    if(!symptoms.contains(symptom)) {
-                        symptoms.add(symptom);
+                    if (clicks % 2 == 0) {
+                        symptomsButton.setBackgroundColor(Color.CYAN);
+                        if(!triggers.contains(symptom)) {
+                            symptoms.add(symptom);
+                        }
+                    } else {
+                        symptomsButton.setBackgroundColor(Color.LTGRAY);
+                        symptoms.remove(symptom);
                     }
+
+                    clicks++;
 
                 }
             });
@@ -252,13 +268,23 @@ public class AddMigraineActivity extends AppCompatActivity {
 
 
             treatmentsButton.setOnClickListener(new View.OnClickListener() {
+                int clicks = 0;
                 @Override
                 public void onClick(View v) {
 
-                    treatmentsButton.setBackgroundColor(Color.CYAN);
-                    if(treatments.contains(treatment)) {
-                        treatments.add(treatment);
+                    if (clicks % 2 == 0) {
+                        treatmentsButton.setBackgroundColor(Color.CYAN);
+                        if(!triggers.contains(treatment)) {
+                            symptoms.add(treatment);
+                        }
+                    } else {
+                        treatmentsButton.setBackgroundColor(Color.LTGRAY);
+                        symptoms.remove(treatment);
                     }
+
+                    clicks++;
+
+
                 }
             });
 
@@ -281,13 +307,21 @@ public class AddMigraineActivity extends AppCompatActivity {
             layout.addView(medicinesButton, lp);
 
             medicinesButton.setOnClickListener(new View.OnClickListener() {
+                int clicks = 0;
                 @Override
                 public void onClick(View v) {
 
-                    medicinesButton.setBackgroundColor(Color.CYAN);
-                    if(!medicines.contains(medicine)) {
-                        medicines.add(medicine);
+                    if (clicks % 2 == 0) {
+                        medicinesButton.setBackgroundColor(Color.CYAN);
+                        if(!triggers.contains(medicine)) {
+                            symptoms.add(medicine);
+                        }
+                    } else {
+                        medicinesButton.setBackgroundColor(Color.LTGRAY);
+                        symptoms.remove(medicine);
                     }
+
+                    clicks++;
                 }
             });
 

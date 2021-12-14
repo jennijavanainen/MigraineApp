@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView averageNumber;
     private TextView lastMigraine;
     private TextView migrainesTotalNumber;
+    private Button addMigraineButton;
     private Button endMigraineButton;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         cal = Calendar.getInstance();
         addNavbar();
         endMigraineButton = findViewById(R.id.endMigraine);
+        addMigraineButton = findViewById(R.id.addNewMigraineButton);
         averageNumber = findViewById(R.id.averageNumber);
         lastMigraine = findViewById(R.id.lastMigraineNumber);
         migrainesTotalNumber = findViewById(R.id.migrainesTotalNumber);
@@ -120,8 +122,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (migraineList.getActiveMigraineExists()) {
             endMigraineButton.setVisibility(View.VISIBLE);
+            addMigraineButton.setText(R.string.edit_migraine_button);
         } else {
             endMigraineButton.setVisibility(View.INVISIBLE);
+            addMigraineButton.setText(R.string.add_new_migraine_button);
         }
     }
 }
