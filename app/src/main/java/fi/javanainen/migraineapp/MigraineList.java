@@ -6,6 +6,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -18,6 +20,7 @@ public class MigraineList {
     private ArrayList<Migraine> migraineList;
     private boolean activeMigraineExists;
     private Calendar c;
+    private Gson gson;
 
 
     public MigraineList() {
@@ -36,6 +39,7 @@ public class MigraineList {
         medicines.add("ibuprofeiini");
         medicines.add("miranax");
         ArrayList<String> treatments = new ArrayList<>();
+        gson = new Gson();
 
         migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(1, 12, 2021), new Time(11, 55), 5, symptoms, medicines, treatments )));
         migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(2, 12, 2021), new Time(12, 45), 5, symptoms, medicines, treatments )));
@@ -50,6 +54,19 @@ public class MigraineList {
      */
     public static MigraineList getInstance() {
         return ourInstance;
+    }
+
+
+    public String listToJson() {
+        String jsonList = gson.toJson(migraineList);
+        return jsonList;
+    }
+
+    public void addMigrainesToList(ArrayList<Migraine> list) {
+        for (Migraine migraine: list
+             ) {
+            migraineList.add(migraine);
+        }
     }
 
     /**
@@ -105,5 +122,7 @@ public class MigraineList {
         }
         return migraineNumber;
     }
+
+
 
 }

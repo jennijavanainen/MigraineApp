@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 
 /**
+ * Activity shows user settings and provides buttons to open EditAttributesActivity to edit user's personal attributes
  * @author Jenni Javanainen
  */
 
@@ -33,6 +34,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     /**
      * Adds bottom navbar to the Activity.
+     * Main icon https://freeicons.io/material-icons-action/home-icon-15944
+     * History icon https://freeicons.io/common-style-icons-14/stats-icon-14529
+     * Settings icon https://freeicons.io/free-setting-and-configuration-icons/settings-icon-9631
+     * Navbar tutorial used: https://material.io/components/bottom-navigation/android#using-bottom-navigation
      */
     public void addNavbar() {
         navBar = findViewById(R.id.bottom_navigation);

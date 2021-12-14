@@ -18,11 +18,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 /**
- * Navbar tutorial used: https://material.io/components/bottom-navigation/android#using-bottom-navigation
+ * MainActivity provides information about ongoing Migraine attack and statistics from previous Migraines.
+ * From the activity user can also add a new Migraine or update existing Migraine by opening AddMigraineActivity.
+ * @author Jenni Javanainen
  */
 
 public class MainActivity extends AppCompatActivity {
-    //public static final String ICON = "icon";
 
     private BottomNavigationView navBar;
     private MigraineList migraineList;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
      * Main icon https://freeicons.io/material-icons-action/home-icon-15944
      * History icon https://freeicons.io/common-style-icons-14/stats-icon-14529
      * Settings icon https://freeicons.io/free-setting-and-configuration-icons/settings-icon-9631
+     * Navbar tutorial used: https://material.io/components/bottom-navigation/android#using-bottom-navigation
      */
     public void addNavbar() {
         navBar = findViewById(R.id.bottom_navigation);

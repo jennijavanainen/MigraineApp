@@ -29,5 +29,7 @@
     <string name="average_text">Average migraine attack length:</string>
     <string name="last_migraine_text">The date of your last migraine:</string>
     <string name="migraines_total_text">Number of migraines in the last 30 days:</string>
+    <string name="start_title">HEADgehog</string>
+    <string name="start_subtitle">The Migraine App</string>
 
 </resources>
