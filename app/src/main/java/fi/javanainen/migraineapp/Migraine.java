@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Migraine {
-
     private ArrayList<String> triggers;
     private ArrayList<MigraineEvent> events;
 

@@ -1,3 +1,4 @@
+<!-- @author Jenni Javanainen-->
 <resources>
     <string name="app_name">HEADgehog</string>
     <string name="save_migraine_button">Save</string>
@@ -31,5 +32,7 @@
     <string name="migraines_total_text">Number of migraines in the last 30 days:</string>
     <string name="start_title">HEADgehog</string>
     <string name="start_subtitle">The Migraine App</string>
+    <string name="pain">Pain [0–10]</string>
+    <string name="end_migraine">End active migraine</string>
 
 </resources>
