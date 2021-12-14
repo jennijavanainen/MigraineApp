@@ -4,8 +4,9 @@ package fi.javanainen.migraineapp;
  * Activity is responsible for adding a new Migraine if no active Migraine exists.
  * Activity will also create a single MigraineEvent. The user chooses the parameters.
  * If active Migraine exists, the activity will use it and create only a new MigraineEvent.
+ * @see https://www.journaldev.com/9976/android-date-time-picker-dialog
  * @author Jenni Javanainen
- * @author teemu Pennanen
+ * @author Teemu Pennanen
  */
 
 import androidx.annotation.ColorInt;
@@ -32,6 +33,7 @@ public class AddMigraineActivity extends AppCompatActivity {
     private final Calendar c = Calendar.getInstance();
 
     // Migraine attributes
+    private boolean activeMigraineExists;
     private MigraineList migraineList;
     private ArrayList<String> triggers;
     private Date date;
@@ -187,9 +189,12 @@ public class AddMigraineActivity extends AppCompatActivity {
 
         for (String trigger:attributeList.getTriggers()) {
 
+
             Button triggerButton = new Button(this);
             triggerButton.setText(trigger);
 
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layout.addView(triggerButton, lp);
 
             triggerButton.setOnClickListener(new View.OnClickListener() {
@@ -263,6 +268,8 @@ public class AddMigraineActivity extends AppCompatActivity {
             Button treatmentsButton = new Button(this);
             treatmentsButton.setText(treatment);
 
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layout.addView(treatmentsButton, lp);
 
 
@@ -304,6 +311,8 @@ public class AddMigraineActivity extends AppCompatActivity {
             Button medicinesButton = new Button(this);
             medicinesButton.setText(medicine);
 
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layout.addView(medicinesButton, lp);
 
             medicinesButton.setOnClickListener(new View.OnClickListener() {

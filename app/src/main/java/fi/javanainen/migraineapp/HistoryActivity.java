@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -18,6 +21,10 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Teemu Pennanen
+ */
 
 public class HistoryActivity extends AppCompatActivity{
     private BottomNavigationView navBar;
@@ -33,26 +40,31 @@ public class HistoryActivity extends AppCompatActivity{
         DisplayItems();
     }
     RecyclerView recyclerView;
-    ArrayList<MigraineList> migraineList;
-    //CustomAdapter customAdapter;
-
-
+    MigraineList migraineList;
+    CustomAdapter customAdapter;
 
     private void DisplayItems(){
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
 
-        migraineList = new ArrayList<>();
+        migraineList = MigraineList.getInstance();
 
         //???
         //migraineList.add(migraineList());
 
-        //customAdapter = new CustomAdapter(this, migraineList, this);
+        customAdapter = new CustomAdapter(getApplicationContext(), migraineList);
 
-        //recyclerView.setAdapter(customAdapter);
+        customAdapter.setOnItemClickedListener(new SelectListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Migraine migraine = migraineList.getMigraine(position);
+                Log.d("katti",migraine.getLastEvent().getDate().toString());
+            }
+        });
+
+        recyclerView.setAdapter(customAdapter);
     }
-
 
     /**
      * Adds bottom navbar to the Activity.
