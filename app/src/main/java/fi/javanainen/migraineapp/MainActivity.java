@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView navBar;
     private MigraineList migraineList;
+    private boolean activeMigraineExists;
 
     private TextView averageNumber;
     private TextView lastMigraine;
@@ -50,8 +51,11 @@ public class MainActivity extends AppCompatActivity {
         endMigraineButton = findViewById(R.id.endMigraine);
         addMigraineButton = findViewById(R.id.addNewMigraineButton);
         averageNumber = findViewById(R.id.averageNumber);
+        averageNumber.setText(migraineList.toStringForm(migraineList.getAvgInMinutes()));
         lastMigraine = findViewById(R.id.lastMigraineNumber);
+        lastMigraine.setText(migraineList.getLast().getLastEvent().getDate().toString());
         migrainesTotalNumber = findViewById(R.id.migrainesTotalNumber);
+        migrainesTotalNumber.setText(Integer.toString(migraineList.howManyMigraines(30)));
 
         updateUI();
     }

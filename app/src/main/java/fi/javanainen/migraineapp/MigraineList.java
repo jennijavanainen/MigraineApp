@@ -69,6 +69,15 @@ public class MigraineList {
     }
 
     /**
+     * Returns the n:th Migraine in the Array
+     * @param index int
+     * @return Migraine
+     */
+    public Migraine getMigraine(int index){
+        return migraineList.get(index);
+    }
+
+    /**
      * Returns the last Migraine in the Array
      * @return Migraine
      */
