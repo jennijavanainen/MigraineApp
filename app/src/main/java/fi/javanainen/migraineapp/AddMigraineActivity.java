@@ -37,10 +37,13 @@ public class AddMigraineActivity extends AppCompatActivity {
     private ArrayList<String> treatments;
     private MigraineEvent event;
     private Migraine migraine;
+    private AttributeList attributeList;
+
 
     // Views
     TextView txtDate, txtTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +64,19 @@ public class AddMigraineActivity extends AppCompatActivity {
         // Luodaan uusi Time-olio
         time = new Time(mHour,mMinute);
         txtTime.setText(time.toString());
+        attributeList = AttributeList.getInstance();
 
         addTriggerButtons();
-        showEvents();
+        addSymptomsButtons();
+        addTreatmentsButtons();
+        addMedicinesButtons();
+
+        triggers = new ArrayList<>();
+        symptoms = new ArrayList<>();
+        medicines = new ArrayList<>();
+        treatments = new ArrayList<>();
+
+
 
         // get activemigraineexists
     }
@@ -131,76 +144,105 @@ public class AddMigraineActivity extends AppCompatActivity {
 
     public void addTriggerButtons(){
 
-        for (String trigger:migraineList.getLast().getTriggers()) {
+        for (String trigger:attributeList.getTriggers()) {
 
 
-            Button myButton = new Button(this);
-            myButton.setText(trigger);
-
-            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layout.addView(myButton, lp);
-
-
-        }
-    }
-    public void showEvents(){
-
-        for (MigraineEvent event:migraineList.getLast().getEvents()) {
-
-            addSymptomsButtons(event);
-            addTreatmentsButtons(event);
-            addMedicinesButtons(event);
-
-        }
-
-    }
-    public void addSymptomsButtons(MigraineEvent event){
-
-        for (String symptom:event.getSymptoms()) {
-
-
-            Button myButton = new Button(this);
-            myButton.setText(symptom);
+            Button triggerButton = new Button(this);
+            triggerButton.setText(trigger);
 
             LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layout.addView(myButton, lp);
+            layout.addView(triggerButton, lp);
 
+            triggerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                    if(!triggers.contains(trigger)) {
+                        symptoms.add(trigger);
+                    }
+                }
+            });
         }
     }
-    public void addTreatmentsButtons(MigraineEvent event){
 
-        for (String treatment:event.getTreatments()) {
+    public void addSymptomsButtons(){
+
+        for (String symptom:attributeList.getSymptoms()) {
 
 
-            Button myButton = new Button(this);
-            myButton.setText(treatment);
+            Button symptomsButton = new Button(this);
+            symptomsButton.setText(symptom);
 
             LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layout.addView(myButton, lp);
+            layout.addView(symptomsButton, lp);
 
+            symptomsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(!symptoms.contains(symptom)) {
+                        symptoms.add(symptom);
+                    }
+
+                }
+            });
 
         }
     }
+    public void addTreatmentsButtons(){
 
-    public void addMedicinesButtons(MigraineEvent event){
-
-        for (String medicine:event.getMedicines()) {
+        for (String treatment:attributeList.getTreatments()) {
 
 
-            Button myButton = new Button(this);
-            myButton.setText(medicine);
+            Button treatmentsButton = new Button(this);
+            treatmentsButton.setText(treatment);
 
             LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layout.addView(myButton, lp);
+            layout.addView(treatmentsButton, lp);
 
+
+
+            treatmentsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(treatments.contains(treatment)) {
+                        treatments.add(treatment);
+                    }
+                }
+            });
 
         }
     }
+
+    public void addMedicinesButtons(){
+
+        for (String medicine:attributeList.getMedicines()) {
+
+
+            Button medicinesButton = new Button(this);
+            medicinesButton.setText(medicine);
+
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layout.addView(medicinesButton, lp);
+
+            medicinesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!medicines.contains(medicine)) {
+                        medicines.add(medicine);
+                    }
+                }
+            });
+
+        }
+    }
+    //onclick tämän luokan listaan!
+
+    //tarkista ettei nappia voi painaa useasti!!
 
 
 }

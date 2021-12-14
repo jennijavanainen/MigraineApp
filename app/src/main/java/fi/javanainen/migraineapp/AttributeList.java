@@ -14,6 +14,10 @@ public class AttributeList {
         symptoms = new ArrayList<>();
         medicines = new ArrayList<>();
         treatments = new ArrayList<>();
+        triggers.add("blaa");
+        symptoms.add("blaa2");
+        medicines.add("blaa3");
+        treatments.add("blaa3");
     }
 
     /**
