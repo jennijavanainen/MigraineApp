@@ -11,11 +11,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * MainActivity provides information about ongoing Migraine attack and statistics from previous Migraines.
@@ -24,14 +28,15 @@ import com.google.android.material.navigation.NavigationBarView;
  */
 
 public class MainActivity extends AppCompatActivity {
+    private Calendar cal;
 
     private BottomNavigationView navBar;
     private MigraineList migraineList;
-    private boolean activeMigraineExists;
 
     private TextView averageNumber;
     private TextView lastMigraine;
     private TextView migrainesTotalNumber;
+    private Button endMigraineButton;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -39,19 +44,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         migraineList = MigraineList.getInstance();
+        cal = Calendar.getInstance();
         addNavbar();
-
-        SharedPreferences prefGet = getSharedPreferences("MigrainePref", Activity.MODE_PRIVATE);
-        activeMigraineExists = prefGet.getBoolean("activeMigraineExists", false);
-        migraineList.setActiveMigraineExists(activeMigraineExists);
-
+        endMigraineButton = findViewById(R.id.endMigraine);
         averageNumber = findViewById(R.id.averageNumber);
-        averageNumber.setText(migraineList.toStringForm(migraineList.getAvgInMinutes()));
         lastMigraine = findViewById(R.id.lastMigraineNumber);
-        lastMigraine.setText(migraineList.getLast().getLastEvent().getDate().toString());
         migrainesTotalNumber = findViewById(R.id.migrainesTotalNumber);
-        migrainesTotalNumber.setText(Integer.toString(migraineList.howManyMigraines(30)));
 
+        updateUI();
     }
 
 
@@ -90,5 +90,38 @@ public class MainActivity extends AppCompatActivity {
     public void addNewMigraineButtonClicked(View view) {
         Intent intent = new Intent(this, AddMigraineActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * End the Migraine by setting one last event with pain value 0 and current date
+     * @param view Button
+     */
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void endMigraine(View view) {
+        Date date = new Date(cal.get(Calendar.DAY_OF_MONTH),cal.get(Calendar.MONTH) + 1,cal.get(Calendar.YEAR));
+        Time time = new Time(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+
+        migraineList.getLast().addEvent(date, time, 0, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>());
+        migraineList.setActiveMigraineExists(false);
+        updateUI();
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void updateUI() {
+        averageNumber.setText(migraineList.toStringForm(migraineList.getAvgInMinutes()));
+        if (migraineList.getMigraines().isEmpty()) {
+            lastMigraine.setText("-");
+        } else {
+            lastMigraine.setText(migraineList.getLast().getLastEvent().getDate().toString());
+        }
+
+        migrainesTotalNumber.setText(Integer.toString(migraineList.howManyMigraines(30)));
+
+        if (migraineList.getActiveMigraineExists()) {
+            endMigraineButton.setVisibility(View.VISIBLE);
+        } else {
+            endMigraineButton.setVisibility(View.INVISIBLE);
+        }
     }
 }

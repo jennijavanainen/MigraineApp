@@ -4,10 +4,11 @@ package fi.javanainen.migraineapp;
  * Activity is responsible for adding a new Migraine if no active Migraine exists.
  * Activity will also create a single MigraineEvent. The user chooses the parameters.
  * If active Migraine exists, the activity will use it and create only a new MigraineEvent.
- * @see https://www.journaldev.com/9976/android-date-time-picker-dialog
  * @author Jenni Javanainen
+ * @author teemu Pennanen
  */
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -15,10 +16,13 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,7 +32,6 @@ public class AddMigraineActivity extends AppCompatActivity {
     private final Calendar c = Calendar.getInstance();
 
     // Migraine attributes
-    private boolean activeMigraineExists;
     private MigraineList migraineList;
     private ArrayList<String> triggers;
     private Date date;
@@ -41,10 +44,13 @@ public class AddMigraineActivity extends AppCompatActivity {
     private Migraine migraine;
     private AttributeList attributeList;
 
+    LinearLayout layout;
+    LinearLayout.LayoutParams lp;
 
     // Views
     TextView txtDate, txtTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private SeekBar seekBar;
 
 
     @Override
@@ -58,61 +64,61 @@ public class AddMigraineActivity extends AppCompatActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH) + 1;
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        // Luodaan uudi Date-olio
+        // Create new Date Object
         date = new Date(mDay,mMonth,mYear);
         txtDate.setText(date.toString());
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
-        // Luodaan uusi Time-olio
+        // Create new Time Object
         time = new Time(mHour,mMinute);
         txtTime.setText(time.toString());
         attributeList = AttributeList.getInstance();
-
-        addTriggerButtons();
-        addSymptomsButtons();
-        addTreatmentsButtons();
-        addMedicinesButtons();
 
         triggers = new ArrayList<>();
         symptoms = new ArrayList<>();
         medicines = new ArrayList<>();
         treatments = new ArrayList<>();
 
+        layout = (LinearLayout) findViewById(R.id.linear_layout);
+        lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+        if (!migraineList.getActiveMigraineExists()) {
+            addTriggerButtons();
+        }
+        addSymptomsButtons();
+        addTreatmentsButtons();
+        addMedicinesButtons();
 
-        // get activemigraineexists
+        seekBar = findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+        pain = seekBar.getProgress();
+
     }
-
-    // Adding triggers
-    // Adding pain
-    // Adding symptoms
-    // Adding medicines
-    // Adding treatments
 
     /**
      * Method creates MigraineEvent object with parameters given by the user.
      * If active Migraine does not exist, the method creates it as well.
-     * Information will be saved in database and the user will return to MainActivity.
+     * Information will be saved in database/shared pref and the user will return to MainActivity.
+     * @author Jenni Javanainen
      * @param view saveButton
      */
     public void saveButtonClicked(View view) {
         event = new MigraineEvent(date, time, pain, symptoms, medicines, treatments);
-        if (activeMigraineExists) {
-            migraineList.getLast().addEvent(date, time, pain, symptoms, medicines, treatments);
-        } else {
+        if (migraineList.getActiveMigraineExists()) {
+            migraineList.getLast().addEvent(date, time, pain, symptoms, medicines, treatments);;
+        } else  {
             migraine = new Migraine(triggers, event);
             migraineList.addMigraine(migraine);
-            activeMigraineExists = true;
+            migraineList.setActiveMigraineExists(true);
         }
 
+        // Json conversion and saving tha data on SharedPref
         String jsonList = migraineList.listToJson();
         SharedPreferences prefPut = getSharedPreferences("MigrainePref", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefEditor = prefPut.edit();
         prefEditor.putString("migraineList", jsonList);
+        prefEditor.putBoolean("migraineExists", migraineList.getActiveMigraineExists());
         prefEditor.commit();
-
-        // Save info to database
-        // (also activeMigraineExists)
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -121,22 +127,26 @@ public class AddMigraineActivity extends AppCompatActivity {
 
     /**
      * Creates a DatePicker where the user can easily select the date. Default value is current date.
+     * https://www.journaldev.com/9976/android-date-time-picker-dialog
+     * @author Jenni Javanainen
      * @param view View
      */
     public void selectDate(View view) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view1, year, monthOfYear, dayOfMonth) -> {
                     date.setDay(dayOfMonth);
-                    date.setMonth(monthOfYear + 1);
+                    date.setMonth(monthOfYear +1);
                     date.setYear(year);
                     txtDate.setText(date.toString());
-                }, mYear, mMonth, mDay);
+                }, mYear, (mMonth -1), mDay);
         datePickerDialog.show();
 
     }
 
     /**
      * Creates a TimePicker in 24h form, where the user can easily select the time. Default value is current time.
+     * https://www.journaldev.com/9976/android-date-time-picker-dialog
+     * @author Jenni Javanainen
      * @param view View
      */
     public void selectTime(View view) {
@@ -149,22 +159,44 @@ public class AddMigraineActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+    /**
+     *
+     * author Jenni Javanainen
+     * https://stackoverflow.com/questions/8629535/implementing-a-slider-seekbar-in-android
+     */
+    SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            // updated continuously as the user slides the thumb
+        }
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // called when the user first touches the SeekBar
+        }
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
+    };
+
     public void addTriggerButtons(){
 
-        for (String trigger:attributeList.getTriggers()) {
+        TextView header = new TextView(this);
+        header.setText("Your triggers");
+        header.setGravity(Gravity.CENTER);
+        layout.addView(header, lp);
 
+        for (String trigger:attributeList.getTriggers()) {
 
             Button triggerButton = new Button(this);
             triggerButton.setText(trigger);
 
-            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layout.addView(triggerButton, lp);
 
             triggerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    triggerButton.setBackgroundColor(Color.CYAN);
                     if(!triggers.contains(trigger)) {
                         symptoms.add(trigger);
                     }
@@ -175,20 +207,24 @@ public class AddMigraineActivity extends AppCompatActivity {
 
     public void addSymptomsButtons(){
 
+        TextView header = new TextView(this);
+        header.setText("Your symptoms");
+        header.setGravity(Gravity.CENTER);
+        layout.addView(header, lp);
+
         for (String symptom:attributeList.getSymptoms()) {
 
 
             Button symptomsButton = new Button(this);
             symptomsButton.setText(symptom);
 
-            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layout.addView(symptomsButton, lp);
 
             symptomsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    symptomsButton.setBackgroundColor(Color.CYAN);
                     if(!symptoms.contains(symptom)) {
                         symptoms.add(symptom);
                     }
@@ -200,14 +236,17 @@ public class AddMigraineActivity extends AppCompatActivity {
     }
     public void addTreatmentsButtons(){
 
+        TextView header = new TextView(this);
+        header.setText("Your treatments");
+        header.setGravity(Gravity.CENTER);
+        layout.addView(header, lp);
+
         for (String treatment:attributeList.getTreatments()) {
 
 
             Button treatmentsButton = new Button(this);
             treatmentsButton.setText(treatment);
 
-            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layout.addView(treatmentsButton, lp);
 
 
@@ -215,6 +254,8 @@ public class AddMigraineActivity extends AppCompatActivity {
             treatmentsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    treatmentsButton.setBackgroundColor(Color.CYAN);
                     if(treatments.contains(treatment)) {
                         treatments.add(treatment);
                     }
@@ -226,19 +267,24 @@ public class AddMigraineActivity extends AppCompatActivity {
 
     public void addMedicinesButtons(){
 
+        TextView header = new TextView(this);
+        header.setText("Your medicines");
+        header.setGravity(Gravity.CENTER);
+        layout.addView(header, lp);
+
         for (String medicine:attributeList.getMedicines()) {
 
 
             Button medicinesButton = new Button(this);
             medicinesButton.setText(medicine);
 
-            LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layout.addView(medicinesButton, lp);
 
             medicinesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    medicinesButton.setBackgroundColor(Color.CYAN);
                     if(!medicines.contains(medicine)) {
                         medicines.add(medicine);
                     }
@@ -247,9 +293,6 @@ public class AddMigraineActivity extends AppCompatActivity {
 
         }
     }
-    //onclick tämän luokan listaan!
-
-    //tarkista ettei nappia voi painaa useasti!!
 
 
 }

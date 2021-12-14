@@ -34,6 +34,7 @@ public class StartActivity extends AppCompatActivity {
     private String savedSymptoms;
     private String savedMedicines;
     private String savedTreatments;
+    private boolean activeMigraineExists;
     private Gson gson;
 
     @Override
@@ -43,12 +44,15 @@ public class StartActivity extends AppCompatActivity {
         attributes = AttributeList.getInstance();
         migraineList = MigraineList.getInstance();
 
+        //Run the app with the two lines to empty Shared Preferences
+        SharedPreferences settings = StartActivity.this.getSharedPreferences("MigrainePref", Activity.MODE_PRIVATE);
+        settings.edit().clear().commit();
+
         triggers = new ArrayList<>();
         symptoms = new ArrayList<>();
         medicines = new ArrayList<>();
         treatments = new ArrayList<>();
         migraines = new ArrayList<>();
-
 
         SharedPreferences prefGet = getSharedPreferences("MigrainePref", Activity.MODE_PRIVATE);
         savedTriggers = prefGet.getString("triggers", "[dehydration]");
@@ -56,7 +60,7 @@ public class StartActivity extends AppCompatActivity {
         savedMedicines = prefGet.getString("medicines", "[Paracetamol500mg]");
         savedTreatments = prefGet.getString("treatments", "[nap]");
         savedMigraines = prefGet.getString("migraineList", "[]");
-
+        activeMigraineExists = prefGet.getBoolean("migraineExists", false);
         TypeToken<List<String>> token = new TypeToken<List<String>>() {};
 
         gson = new Gson();
@@ -82,8 +86,9 @@ public class StartActivity extends AppCompatActivity {
         migraines = gson.fromJson(savedMigraines, token2.getType());
 
         migraineList.addMigrainesToList(migraines);
+        migraineList.setActiveMigraineExists(activeMigraineExists);
 
-        nextActivity(5000);
+        nextActivity(4000);
     }
 
     /**
