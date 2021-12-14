@@ -26,24 +26,15 @@ public class MigraineList {
     public MigraineList() {
         migraineList = new ArrayList<>();
 
-        // Testausta varten
         ArrayList<String> triggers = new ArrayList<>();
-        triggers.add("aurinko");
-        triggers.add("darra");
         ArrayList<String> symptoms = new ArrayList<>();
-        symptoms.add("päänsärky");
-        symptoms.add("oksetus");
-        symptoms.add("neusea");
-        symptoms.add("känkkäränkkä");
         ArrayList<String> medicines = new ArrayList<>();
-        medicines.add("ibuprofeiini");
-        medicines.add("miranax");
         ArrayList<String> treatments = new ArrayList<>();
         gson = new Gson();
 
-        migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(1, 12, 2021), new Time(11, 55), 5, symptoms, medicines, treatments )));
-        migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(2, 12, 2021), new Time(12, 45), 5, symptoms, medicines, treatments )));
-        getLast().addEvent(new Date(3,12,2021), new Time(12,55), 5, symptoms, medicines, treatments);
+        //migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(1, 12, 2021), new Time(11, 55), 5, symptoms, medicines, treatments )));
+        //migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(2, 12, 2021), new Time(12, 45), 5, symptoms, medicines, treatments )));
+        //getLast().addEvent(new Date(3,12,2021), new Time(12,55), 5, symptoms, medicines, treatments);
 
         c = Calendar.getInstance();
     }

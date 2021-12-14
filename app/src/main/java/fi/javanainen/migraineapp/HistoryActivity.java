@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HistoryActivity extends AppCompatActivity implements SelectListener{
+public class HistoryActivity extends AppCompatActivity{
     private BottomNavigationView navBar;
 
 
@@ -34,7 +34,7 @@ public class HistoryActivity extends AppCompatActivity implements SelectListener
     }
     RecyclerView recyclerView;
     ArrayList<MigraineList> migraineList;
-    CustomAdapter customAdapter;
+    //CustomAdapter customAdapter;
 
 
 
@@ -48,9 +48,9 @@ public class HistoryActivity extends AppCompatActivity implements SelectListener
         //???
         //migraineList.add(migraineList());
 
-        customAdapter = new CustomAdapter(this, migraineList, this);
+        //customAdapter = new CustomAdapter(this, migraineList, this);
 
-        recyclerView.setAdapter(customAdapter);
+        //recyclerView.setAdapter(customAdapter);
     }
 
 
@@ -78,10 +78,11 @@ public class HistoryActivity extends AppCompatActivity implements SelectListener
     }
 
 
-    @Override
+    /*@Override
     public void onItemClicked(MigraineList migraineList) {
         Intent intent = new Intent(this, ViewHistoryActivity.class);
 
         startActivity(intent);
     }
+     */
 }
