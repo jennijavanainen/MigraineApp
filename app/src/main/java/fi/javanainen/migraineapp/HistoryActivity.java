@@ -89,12 +89,4 @@ public class HistoryActivity extends AppCompatActivity{
         });
     }
 
-
-    /*@Override
-    public void onItemClicked(MigraineList migraineList) {
-        Intent intent = new Intent(this, ViewHistoryActivity.class);
-
-        startActivity(intent);
-    }
-     */
 }
