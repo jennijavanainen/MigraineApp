@@ -72,6 +72,7 @@ public class MigraineList {
      * Returns the n:th Migraine in the Array
      * @param index int
      * @return Migraine
+     * @author Teemu Pennanen
      */
     public Migraine getMigraine(int index){
         return migraineList.get(index);

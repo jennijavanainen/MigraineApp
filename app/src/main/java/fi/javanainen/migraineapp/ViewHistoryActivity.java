@@ -10,7 +10,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 /**
- *
+ * Activity for the onClick method in HistoryActivity
  * @author Teemu Pennanen
  */
 

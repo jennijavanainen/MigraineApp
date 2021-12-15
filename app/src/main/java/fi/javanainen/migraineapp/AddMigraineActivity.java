@@ -180,6 +180,12 @@ public class AddMigraineActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Method for adding buttons for migraine attributes. Users inputs determine the text of the buttons and the amount of them.
+     * In total 4 different methods for the 4 attributes.
+     * @author Teemu Pennanen
+     */
+
     public void addTriggerButtons(){
 
         TextView header = new TextView(this);

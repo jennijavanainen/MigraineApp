@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Activity for showing users previous migraines.
+ * Shows date and time.
+ * In order of newest to oldest.
  * @author Teemu Pennanen
  */
 
