@@ -105,6 +105,15 @@ public class MainActivity extends AppCompatActivity {
 
         migraineList.getLast().addEvent(date, time, 0, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>());
         migraineList.setActiveMigraineExists(false);
+
+        // Json conversion and saving tha data on SharedPref
+        String jsonList = migraineList.listToJson();
+        SharedPreferences prefPut = getSharedPreferences("MigrainePref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = prefPut.edit();
+        prefEditor.putString("migraineList", jsonList);
+        prefEditor.putBoolean("migraineExists", migraineList.getActiveMigraineExists());
+        prefEditor.commit();
+
         updateUI();
 
     }
