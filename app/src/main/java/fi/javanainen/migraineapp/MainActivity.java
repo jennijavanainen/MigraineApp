@@ -17,7 +17,12 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.jjoe64.graphview.DefaultLabelFormatter;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private Button addMigraineButton;
     private Button endMigraineButton;
 
+    GraphView graph;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         averageNumber = findViewById(R.id.averageNumber);
         lastMigraine = findViewById(R.id.lastMigraineNumber);
         migrainesTotalNumber = findViewById(R.id.migrainesTotalNumber);
+        graph = (GraphView) findViewById(R.id.graph);
 
         updateUI();
     }
@@ -83,6 +91,30 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void addGraph() {
+        ArrayList<MigraineEvent> activeMigraineEvents = migraineList.getLast().getEvents();
+        DataPoint[] graphPoints = new DataPoint[activeMigraineEvents.size() + 1];
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(10);
+
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+
+        int i = 0;
+        int x = 0;
+        int y = 0;
+        for (MigraineEvent event: activeMigraineEvents) {
+            y = event.getPain();
+            graphPoints[i] = new DataPoint(x, y);
+            x++;
+            i++;
+        }
+        graphPoints[i] = new DataPoint(x, y);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(graphPoints);
+        graph.setTitle("Current migraine progress");
+        graph.addSeries(series);
     }
 
     /**
@@ -132,9 +164,14 @@ public class MainActivity extends AppCompatActivity {
         if (migraineList.getActiveMigraineExists()) {
             endMigraineButton.setVisibility(View.VISIBLE);
             addMigraineButton.setText(R.string.edit_migraine_button);
+            graph.setVisibility(View.VISIBLE);
+            addGraph();
         } else {
             endMigraineButton.setVisibility(View.INVISIBLE);
             addMigraineButton.setText(R.string.add_new_migraine_button);
+            graph.setVisibility(View.INVISIBLE);
         }
+
+        //addGraph();
     }
 }

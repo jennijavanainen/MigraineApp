@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import com.google.gson.Gson;
 
 
@@ -110,7 +112,7 @@ public class EditAttributesActivity extends AppCompatActivity {
                         infoPanel.setText(R.string.info_long_word);
                     }
                     // Duplicate input
-                    else if (list.contains(attribute.trim())) {
+                    else if (list.contains(attribute.trim().toLowerCase())) {
                         infoPanel.setVisibility(View.VISIBLE);
                         infoPanel.setText(R.string.info_item_exists);
                     }
@@ -123,7 +125,7 @@ public class EditAttributesActivity extends AppCompatActivity {
                     else {
                         infoPanel.setVisibility(View.INVISIBLE);
                         addButton(attribute);
-                        addToList(attribute, id);
+                        addToList(attribute.toLowerCase(), id);
                         userInput.getText().clear();
                         userInput.requestFocus();
                         return true;

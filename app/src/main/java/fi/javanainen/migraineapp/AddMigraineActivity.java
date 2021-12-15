@@ -18,6 +18,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -204,12 +205,12 @@ public class AddMigraineActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     if (clicks % 2 == 0) {
-                        triggerButton.setBackgroundColor(Color.CYAN);
+                        triggerButton.getBackground().setColorFilter(Color.parseColor("#FFECAB72"), PorterDuff.Mode.DARKEN);
                         if(!triggers.contains(trigger)) {
                             symptoms.add(trigger);
                         }
                     } else {
-                        triggerButton.setBackgroundColor(Color.LTGRAY);
+                        triggerButton.getBackground().setColorFilter(Color.parseColor("#F1CAC7C7"), PorterDuff.Mode.DARKEN);
                         symptoms.remove(trigger);
                     }
 
@@ -240,12 +241,12 @@ public class AddMigraineActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     if (clicks % 2 == 0) {
-                        symptomsButton.setBackgroundColor(Color.CYAN);
+                        symptomsButton.getBackground().setColorFilter(Color.parseColor("#FFECAB72"), PorterDuff.Mode.DARKEN);
                         if(!triggers.contains(symptom)) {
                             symptoms.add(symptom);
                         }
                     } else {
-                        symptomsButton.setBackgroundColor(Color.LTGRAY);
+                        symptomsButton.getBackground().setColorFilter(Color.parseColor("#F1CAC7C7"), PorterDuff.Mode.DARKEN);
                         symptoms.remove(symptom);
                     }
 
@@ -281,12 +282,12 @@ public class AddMigraineActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     if (clicks % 2 == 0) {
-                        treatmentsButton.setBackgroundColor(Color.CYAN);
+                        treatmentsButton.getBackground().setColorFilter(Color.parseColor("#FFECAB72"), PorterDuff.Mode.DARKEN);
                         if(!triggers.contains(treatment)) {
                             symptoms.add(treatment);
                         }
                     } else {
-                        treatmentsButton.setBackgroundColor(Color.LTGRAY);
+                        treatmentsButton.getBackground().setColorFilter(Color.parseColor("#F1CAC7C7"), PorterDuff.Mode.DARKEN);
                         symptoms.remove(treatment);
                     }
 
@@ -322,12 +323,12 @@ public class AddMigraineActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     if (clicks % 2 == 0) {
-                        medicinesButton.setBackgroundColor(Color.CYAN);
+                        medicinesButton.getBackground().setColorFilter(Color.parseColor("#FFECAB72"), PorterDuff.Mode.DARKEN);
                         if(!triggers.contains(medicine)) {
                             symptoms.add(medicine);
                         }
                     } else {
-                        medicinesButton.setBackgroundColor(Color.LTGRAY);
+                        medicinesButton.getBackground().setColorFilter(Color.parseColor("#F1CAC7C7"), PorterDuff.Mode.DARKEN);
                         symptoms.remove(medicine);
                     }
 
