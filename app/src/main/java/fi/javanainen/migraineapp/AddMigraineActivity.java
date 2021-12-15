@@ -107,7 +107,7 @@ public class AddMigraineActivity extends AppCompatActivity {
     public void saveButtonClicked(View view) {
         event = new MigraineEvent(date, time, pain, symptoms, medicines, treatments);
         if (migraineList.getActiveMigraineExists()) {
-            migraineList.getLast().addEvent(date, time, pain, symptoms, medicines, treatments);;
+            migraineList.getLast().addEvent(date, time, pain, symptoms, medicines, treatments);
         } else  {
             migraine = new Migraine(triggers, event);
             migraineList.addMigraine(migraine);
@@ -177,6 +177,7 @@ public class AddMigraineActivity extends AppCompatActivity {
         }
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
+            pain = seekBar.getProgress();
         }
     };
 
