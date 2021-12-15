@@ -61,7 +61,7 @@ public class HistoryActivity extends AppCompatActivity{
             @Override
             public void onItemClicked(int position) {
                 Migraine migraine = migraineList.getMigraine(position);
-                Log.d("katti",migraine.getLastEvent().getDate().toString());
+                Log.d("onClick",migraine.getLastEvent().getDate().toString());
             }
         });
 
