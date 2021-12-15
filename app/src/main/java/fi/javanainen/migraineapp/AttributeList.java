@@ -30,7 +30,6 @@ public class AttributeList {
     }
 
 
-
     /**
      * Adds new String to triggers-Array
      * @param trigger String

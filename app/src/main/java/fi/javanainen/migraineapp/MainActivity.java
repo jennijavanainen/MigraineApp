@@ -27,8 +27,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * MainActivity provides information about ongoing Migraine attack and statistics from previous Migraines.
+ * MainActivity provides a graph about ongoing Migraine attack and statistics from previous Migraines.
  * From the activity user can also add a new Migraine or update existing Migraine by opening AddMigraineActivity.
+ * User can also end the ongoing Migraine.
  * @author Jenni Javanainen
  */
 
@@ -64,14 +65,12 @@ public class MainActivity extends AppCompatActivity {
         updateUI();
     }
 
-
-
     /**
      * Adds bottom navbar to the Activity.
      * Main icon https://freeicons.io/material-icons-action/home-icon-15944
      * History icon https://freeicons.io/common-style-icons-14/stats-icon-14529
      * Settings icon https://freeicons.io/free-setting-and-configuration-icons/settings-icon-9631
-     * Navbar tutorial used: https://material.io/components/bottom-navigation/android#using-bottom-navigation
+     * Navbar source: https://material.io/components/bottom-navigation/android#using-bottom-navigation
      */
     public void addNavbar() {
         navBar = findViewById(R.id.bottom_navigation);
@@ -93,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method adds the graph from the active Migraine attack. The graph shows pain as a function of time from all events in the Migraine.
+     * Source: https://github.com/jjoe64/GraphView
+     */
     public void addGraph() {
         ArrayList<MigraineEvent> activeMigraineEvents = migraineList.getLast().getEvents();
         DataPoint[] graphPoints = new DataPoint[activeMigraineEvents.size() + 1];
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Starts AddMigraineActivity when button is clicked
-     * @param view View
+     * @param view Button
      */
     public void addNewMigraineButtonClicked(View view) {
         Intent intent = new Intent(this, AddMigraineActivity.class);
@@ -150,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method updates the user interface and determines what views to show, based on activeMigraineExists boolean value
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void updateUI() {
         averageNumber.setText(migraineList.toStringForm(migraineList.getAvgInMinutes()));
@@ -172,6 +178,5 @@ public class MainActivity extends AppCompatActivity {
             graph.setVisibility(View.INVISIBLE);
         }
 
-        //addGraph();
     }
 }

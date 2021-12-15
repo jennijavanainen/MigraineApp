@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- *
+ * Singleton class holding a list of Migraines
  * @author Jenni Javanainen
  */
 public class MigraineList {
@@ -32,10 +32,6 @@ public class MigraineList {
         ArrayList<String> treatments = new ArrayList<>();
         gson = new Gson();
 
-        //migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(1, 12, 2021), new Time(11, 55), 5, symptoms, medicines, treatments )));
-        //migraineList.add(new Migraine(triggers, new MigraineEvent(new Date(2, 12, 2021), new Time(12, 45), 5, symptoms, medicines, treatments )));
-        //getLast().addEvent(new Date(3,12,2021), new Time(12,55), 5, symptoms, medicines, treatments);
-
         c = Calendar.getInstance();
     }
 
@@ -47,12 +43,19 @@ public class MigraineList {
         return ourInstance;
     }
 
-
+    /**
+     * Converts the List Object into json String
+     * @return String list of Migraines in json form
+     */
     public String listToJson() {
         String jsonList = gson.toJson(migraineList);
         return jsonList;
     }
 
+    /**
+     * Method adds all the Migraines in the list to the migraineList Singleton
+     * @param list of Migraines
+     */
     public void addMigrainesToList(ArrayList<Migraine> list) {
         for (Migraine migraine: list
              ) {
@@ -85,16 +88,32 @@ public class MigraineList {
         return migraineList.get(migraineList.size() - 1);
     }
 
+    /**
+     * Getter for activeMigraineExists
+     * @return Boolean
+     */
     public boolean getActiveMigraineExists() {
         return activeMigraineExists;
     }
 
+    /**
+     * Setter for activeMigraineExists
+     * @param a
+     */
     public void setActiveMigraineExists(boolean a) { this.activeMigraineExists = a; }
 
+    /**
+     * Returns a list of Migraines
+     * @return list of Migraines
+     */
     public ArrayList<Migraine> getMigraines() {
         return migraineList;
     }
 
+    /**
+     * Counts and returns the average Migraine length in minutes
+     * @return Integer minutes
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public int getAvgInMinutes() {
         int minutes = 0;
@@ -104,12 +123,23 @@ public class MigraineList {
         return minutes;
     }
 
+    /**
+     * Returns given parameter converted into hours and minutes
+     * @param minutes Integer
+     * @return String minutes in hours and minutes
+     */
     public String toStringForm(int minutes) {
         int hours = minutes / 60;
         int min = minutes % 60;
         return hours + " h " + min + " min";
     }
 
+    /**
+     * Counts and returns how many Migraines are found on the last counting back from this moment.
+     * The period of time in days is given as parametet.
+     * @param period Integer days
+     * @return Integer number of Migraines
+     */
     public int howManyMigraines(int period) {
         int migraineNumber = 0;
         long todayMillis = c.getTimeInMillis();

@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    // Jennin lisäämä juttu
+
     implementation 'androidx.room:room-common:2.2.6'
     implementation files('libs\\gson-2.8.9.jar')
     implementation files('libs\\gson-2.8.9.jar')
@@ -36,7 +36,8 @@ dependencies {
     def room_version = "2.3.0"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    //compileOnly files("C:/Users/jenni/AppData/Local/Android/Sdk/platforms/android-31/android.jar")
+    compileOnly files("C:/Users/jenni/AppData/Local/Android/Sdk/platforms/android-31/android.jar")
+
 
     //graph
     implementation 'com.jjoe64:graphview:4.2.2'

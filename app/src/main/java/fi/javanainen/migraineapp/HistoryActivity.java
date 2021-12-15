@@ -50,9 +50,6 @@ public class HistoryActivity extends AppCompatActivity{
 
         migraineList = MigraineList.getInstance();
 
-        //???
-        //migraineList.add(migraineList());
-
         customAdapter = new CustomAdapter(getApplicationContext(), migraineList);
 
         customAdapter.setOnItemClickedListener(new SelectListener() {

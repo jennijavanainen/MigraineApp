@@ -1,11 +1,5 @@
 package fi.javanainen.migraineapp;
 
-/**
- * Class represents a single migraine attack.
- * A migraine must have two or more events and it can have triggers.
- * @author Jenni Javanainen
- */
-
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -14,6 +8,12 @@ import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+/**
+ * Class represents a single migraine attack.
+ * A migraine must have two or more events and it can have triggers.
+ * @author Jenni Javanainen
+ */
 
 public class Migraine {
     private ArrayList<String> triggers;
@@ -39,17 +39,25 @@ public class Migraine {
         events.add(new MigraineEvent(date, time, pain, symptoms, medicines, treatments));
     }
 
+    /**
+     * Getter for trigger Array
+     * @return List of triggers
+     */
     public ArrayList<String> getTriggers() {
         return triggers;
     }
 
+    /**
+     * Getter for MigraineEvent Array
+     * @return List of Migraine Events
+     */
     public ArrayList<MigraineEvent> getEvents() {
         return events;
     }
 
     /**
      * Method compares the first and last Event in Array and returns the difference
-     * @return Time the difference in hours and minutes
+     * @return Time the difference in minutes
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public int getLength() {
@@ -71,6 +79,10 @@ public class Migraine {
         return events.get(events.size() - 1);
     }
 
+    /**
+     * Method returns the firstMigraineEvent in Array
+     * @return MigraineEvent first MigraineEvent
+     */
     public MigraineEvent getFirstEvent() { return events.get(0); }
 
 

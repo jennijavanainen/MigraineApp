@@ -18,7 +18,7 @@ import java.util.List;
 import fi.javanainen.migraineapp.CustomViewHolder;
 import fi.javanainen.migraineapp.Migraine;
 import fi.javanainen.migraineapp.MigraineEvent;
-import fi.javanainen.migraineapp.R;
+
 
 /**
  * Custom adaper for RecyclerView
@@ -36,6 +36,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
     }
 
+    /** Custom ViewHolder for RecyclerView
+    * @author Teemu Pennanen
+    */
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,7 +46,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
     }
 
-
+    /** Activity for showing users previous migraines.
+     * Shows date and time.
+     * In order of newest to oldest.
+     * @author Teemu Pennanen
+     */
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
@@ -56,6 +63,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
         return list.getMigraines().size();
     }
 
+     /** Listener for recycler view
+     * @author Teemu Pennanen
+     */
     public void setOnItemClickedListener(SelectListener listener){
         this.listener = listener;
     }
