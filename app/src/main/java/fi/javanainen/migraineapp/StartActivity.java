@@ -54,6 +54,7 @@ public class StartActivity extends AppCompatActivity {
         treatments = new ArrayList<>();
         migraines = new ArrayList<>();
 
+        // Collecting information from SharedPref
         SharedPreferences prefGet = getSharedPreferences("MigrainePref", Activity.MODE_PRIVATE);
         savedTriggers = prefGet.getString("triggers", "[dehydration]");
         savedSymptoms = prefGet.getString("symptoms", "[nausea]");
@@ -65,6 +66,7 @@ public class StartActivity extends AppCompatActivity {
 
         gson = new Gson();
 
+        // Converting json string into correct form
         triggers = gson.fromJson(savedTriggers, token.getType());
         for (String trigger: triggers) {
             attributes.addTrigger(trigger);

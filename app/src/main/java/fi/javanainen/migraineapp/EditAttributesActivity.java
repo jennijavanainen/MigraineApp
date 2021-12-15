@@ -29,7 +29,7 @@ import com.google.gson.Gson;
 /**
  * In the activity user can add and remove their personal migraine attributes.
  * The activity shows different information depending on which button was clicked on SettingsActivity.
- * Tutorial used fro creating buttons programmatically: https://stackoverflow.com/questions/57100375/can-i-add-number-of-buttons-in-runtime-depending-on-a-variable-and-not-in-xml/57100637
+ * Tutorial used for creating buttons programmatically: https://stackoverflow.com/questions/57100375/can-i-add-number-of-buttons-in-runtime-depending-on-a-variable-and-not-in-xml/57100637
  * @author Jenni Javanainen
  */
 
@@ -69,7 +69,9 @@ public class EditAttributesActivity extends AppCompatActivity {
 
         setInputText(id);
 
-        // Save button listener
+        /**
+         * OnClickListener for save button
+         */
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 savedTriggers = gson.toJson(attributes.getTriggers());
@@ -91,7 +93,9 @@ public class EditAttributesActivity extends AppCompatActivity {
             }
         });
 
-        // Adding Listener to the user input field
+        /**
+         * OnKeyListener to user input field
+         */
         userInput.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&

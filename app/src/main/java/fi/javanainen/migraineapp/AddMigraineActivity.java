@@ -9,9 +9,8 @@ package fi.javanainen.migraineapp;
  * @author Teemu Pennanen
  */
 
-import androidx.annotation.ColorInt;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -34,7 +33,6 @@ public class AddMigraineActivity extends AppCompatActivity {
     private final Calendar c = Calendar.getInstance();
 
     // Migraine attributes
-    private boolean activeMigraineExists;
     private MigraineList migraineList;
     private ArrayList<String> triggers;
     private Date date;
@@ -103,7 +101,7 @@ public class AddMigraineActivity extends AppCompatActivity {
      * If active Migraine does not exist, the method creates it as well.
      * Information will be saved in database/shared pref and the user will return to MainActivity.
      * @author Jenni Javanainen
-     * @param view saveButton
+     * @param view Button
      */
     public void saveButtonClicked(View view) {
         event = new MigraineEvent(date, time, pain, symptoms, medicines, treatments);
@@ -132,7 +130,7 @@ public class AddMigraineActivity extends AppCompatActivity {
      * Creates a DatePicker where the user can easily select the date. Default value is current date.
      * https://www.journaldev.com/9976/android-date-time-picker-dialog
      * @author Jenni Javanainen
-     * @param view View
+     * @param view DatePicker
      */
     public void selectDate(View view) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
@@ -150,7 +148,7 @@ public class AddMigraineActivity extends AppCompatActivity {
      * Creates a TimePicker in 24h form, where the user can easily select the time. Default value is current time.
      * https://www.journaldev.com/9976/android-date-time-picker-dialog
      * @author Jenni Javanainen
-     * @param view View
+     * @param view TimePicker
      */
     public void selectTime(View view) {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
@@ -163,18 +161,16 @@ public class AddMigraineActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * SeekBar listener
      * author Jenni Javanainen
      * https://stackoverflow.com/questions/8629535/implementing-a-slider-seekbar-in-android
      */
     SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            // updated continuously as the user slides the thumb
         }
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-            // called when the user first touches the SeekBar
         }
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
@@ -182,6 +178,11 @@ public class AddMigraineActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Method for adding buttons for migraine attributes. Users inputs determine the text of the buttons and the amount of them.
+     * In total 4 different methods for the 4 attributes.
+     * @author Teemu Pennanen
+     */
     public void addTriggerButtons(){
 
         TextView header = new TextView(this);
@@ -220,6 +221,11 @@ public class AddMigraineActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method for adding buttons for migraine attributes. Users inputs determine the text of the buttons and the amount of them.
+     * In total 4 different methods for the 4 attributes.
+     * @author Teemu Pennanen
+     */
     public void addSymptomsButtons(){
 
         TextView header = new TextView(this);
@@ -257,6 +263,12 @@ public class AddMigraineActivity extends AppCompatActivity {
 
         }
     }
+
+    /**
+     * Method for adding buttons for migraine attributes. Users inputs determine the text of the buttons and the amount of them.
+     * In total 4 different methods for the 4 attributes.
+     * @author Teemu Pennanen
+     */
     public void addTreatmentsButtons(){
 
         TextView header = new TextView(this);
@@ -300,6 +312,11 @@ public class AddMigraineActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method for adding buttons for migraine attributes. Users inputs determine the text of the buttons and the amount of them.
+     * In total 4 different methods for the 4 attributes.
+     * @author Teemu Pennanen
+     */
     public void addMedicinesButtons(){
 
         TextView header = new TextView(this);
