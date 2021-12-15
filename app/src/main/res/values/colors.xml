@@ -8,6 +8,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="normal_color">#FF03DAC5</color>
-    <color name="highlight_color">#FF018786</color>
+    <color name="main_stats_text">#193A01</color>
+    <color name="normal_color">#874001</color>
+    <color name="highlight_color">#874001</color>
+    <color name="mid_orange">#DC753D</color>
+    <color name="light_orange">#FFECAB72</color>
+    <color name="light_grey">#F1CAC7C7</color>
+
 </resources>
