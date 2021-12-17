@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -30,7 +31,6 @@ public class HistoryActivity extends AppCompatActivity{
     private BottomNavigationView navBar;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,7 @@ public class HistoryActivity extends AppCompatActivity{
     RecyclerView recyclerView;
     MigraineList migraineList;
     CustomAdapter customAdapter;
+
 
     private void DisplayItems(){
         recyclerView = findViewById(R.id.recycler_view);
@@ -56,7 +57,9 @@ public class HistoryActivity extends AppCompatActivity{
             @Override
             public void onItemClicked(int position) {
                 Migraine migraine = migraineList.getMigraine(position);
-                Log.d("katti",migraine.getLastEvent().getDate().toString());
+                Log.d("Pain",Integer.toString(migraineList.getMigraine(position).getFirstEvent().getPain()));
+                Log.d("Symptoms",migraineList.getMigraine(position).getFirstEvent().getSymptoms().toString());
+
             }
         });
 

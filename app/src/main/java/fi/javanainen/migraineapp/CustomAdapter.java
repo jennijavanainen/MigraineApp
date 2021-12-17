@@ -56,6 +56,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
         holder.textDate.setText(list.getMigraine(position).getFirstEvent().getDate().toString());
         holder.textTime.setText(list.getMigraine(position).getFirstEvent().getTime().toString());
+        holder.textSymptoms.setText(list.getMigraine(position).getFirstEvent().getSymptoms().toString());
+        holder.textPain.setText(Integer.toString(list.getMigraine(position).getFirstEvent().getPain()));
+
     }
 
     @Override
@@ -68,5 +71,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
      */
     public void setOnItemClickedListener(SelectListener listener){
         this.listener = listener;
+
     }
 }
